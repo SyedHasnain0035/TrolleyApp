@@ -32,10 +32,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var popUpViewDetailLabel: UILabel!
     @IBOutlet weak var popUpViewWeightLabel: UILabel!
     
-    // Declar Variables
-    var fruitInfo = [ItemInfo]()
-    var vegetableInfo = [ItemInfo]()
-    var allItemInfo = [ItemInfo]()
+    // Declar Variable
+    var selectedItems = [ItemInfo]()
     var isFruit = false
     var isVegetable = false
     var allItem = true
@@ -47,10 +45,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         myCollectionView.delegate = self
         myCollectionView.dataSource = self
+        // Data base refrence
         ref = Database.database().reference()
         checkIfUserIsLogedIn()
         myCollectionView.reloadData()
-    }
+        }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,16 +58,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         mySearchBar.resignFirstResponder()
         myCollectionView.reloadData()
         self.homeTotalPrice.text = "\(Trolley.shared.price)"
-        checkIfUserIsLogedIn()
+       // checkIfUserIsLogedIn()
     }
     override func viewWillDisappear(_ animated: Bool) {
         mySearchBar.resignFirstResponder()
-       // self.setValueToItem()
+        // self.setValueToItem()
     }
     
     ///////////////////////////////////////
     // User Define Functions
     func checkIfUserIsLogedIn()  {
+        // check for auth user
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handelLogout), with: nil, afterDelay: 0)
         } else {
@@ -79,9 +79,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func setValueToItem() {
-        self.allItemInfo = Trolley.shared.allItemInfo
-        self.fruitInfo = Trolley.shared.fruitItem
-        self.vegetableInfo = Trolley.shared.vegetableItem
+        self.selectedItems = Trolley.shared.allItemInfo
+      /*  self.fruitInfo = Trolley.shared.fruitItem
+        self.vegetableInfo = Trolley.shared.vegetableItem*/
         myCollectionView.reloadData()
     }
     func handelLogout()  {
@@ -91,12 +91,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } catch let logoutError {
             print(logoutError)
         }
-        let logout = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-        self.navigationController?.pushViewController(logout, animated: true)
+        AlertView.showLoginAlert(self)
     }
-   
+    
     ///////////////////////////////////////////////////////////////
     // Collection View Delegates
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         popUpView.layer.borderWidth = 4
         popUpView.layer.borderColor = UIColor.gray.cgColor
@@ -104,69 +104,52 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.popUpView.alpha = 8.5
         popUpCount = indexPath.row
         if isFruit == true {
-            if fruitInfo[indexPath.row].itemCount == 0 {
-                popUpHideView.alpha = 0
-                popUpHideView2.alpha = 0
+            if selectedItems[indexPath.row].itemCount == 0 {
+                popHideZeroAlpha()
             } else {
-                popUpHideView.alpha = 1
-                popUpHideView2.alpha = 1
-                popUpViewCountLabel.text = "\(fruitInfo[indexPath.row].itemCount!)"
+                popHideWithAlphaOne()
+                popUpViewCountLabel.text = "\(selectedItems[indexPath.row].itemCount!)"
             }
-            popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[indexPath.row].itemImage
-            let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-            imageView.sd_setImage(with: URL(string: (fruitInfo[indexPath.row].itemImage)!))
-            popUpViewPriceLabel.text = "\(fruitInfo[indexPath.row].itemPrice!) AED"
-            popUpViewDetailLabel.text = fruitInfo[indexPath.row].itemDetail
-            popUpViewWeightLabel.text = "per \(fruitInfo[indexPath.row].itemWeight!)"
+            collectionViewSetting(item: selectedItems[indexPath.row])
+            //  cccccc11111
         } else if isVegetable == true {
-            if vegetableInfo[indexPath.row].itemCount == 0 {
-                popUpHideView.alpha = 0
-                popUpHideView2.alpha = 0
+            if selectedItems[indexPath.row].itemCount == 0 {
+                popHideZeroAlpha()
             } else {
-                popUpHideView.alpha = 1
-                popUpHideView2.alpha = 1
-                popUpViewCountLabel.text = "\(vegetableInfo[indexPath.row].itemCount!)"
+                popHideWithAlphaOne()
+                popUpViewCountLabel.text = "\(selectedItems[indexPath.row].itemCount!)"
             }
-            let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-            imageView.sd_setImage(with: URL(string: (vegetableInfo[indexPath.row].itemImage)!))
-            popUpViewPriceLabel.text = "\(vegetableInfo[indexPath.row].itemPrice!) AED"
-            popUpViewDetailLabel.text = vegetableInfo[indexPath.row].itemDetail
-            popUpViewWeightLabel.text = "per \(allItemInfo[indexPath.row].itemWeight!)"
+            collectionViewSetting(item: selectedItems[indexPath.row])
+            // cccccc222222
         } else {
-            if allItemInfo[indexPath.row].itemCount == 0 {
-                popUpHideView.alpha = 0
-                popUpHideView2.alpha = 0
+            if selectedItems[indexPath.row].itemCount == 0 {
+                popHideZeroAlpha()
             } else {
-                popUpHideView.alpha = 1
-                popUpHideView2.alpha = 1
-                popUpViewCountLabel.text = "\(allItemInfo[indexPath.row].itemCount!)"
+                popHideWithAlphaOne()
+                popUpViewCountLabel.text = "\(selectedItems[indexPath.row].itemCount!)"
             }
-            popUpViewImage.image = #imageLiteral(resourceName: "loading")
-            let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-            imageView.sd_setImage(with: URL(string: (allItemInfo[indexPath.row].itemImage)!))
-            popUpViewPriceLabel.text = "\(allItemInfo[indexPath.row].itemPrice!) AED"
-            popUpViewDetailLabel.text = allItemInfo[indexPath.row].itemDetail
-            popUpViewWeightLabel.text = "per \(allItemInfo[indexPath.row].itemWeight!)"
+            collectionViewSetting(item: selectedItems[indexPath.row])
+        // cccccc333333333
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isFruit == true {
-            return fruitInfo.count
+            return selectedItems.count
         } else if isVegetable == true {
-            return vegetableInfo.count
+            return selectedItems.count
         } else {
-            return allItemInfo.count
+            return selectedItems.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isFruit == true {
+       // if isFruit == true {
             self.myCollectionView.register(UINib(nibName: "AllItemsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "allItemCollection")
             let cell : AllItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "allItemCollection", for: indexPath) as! AllItemsCollectionViewCell
             let imageView = cell.viewWithTag(1) as! UIImageView
-            imageView.sd_setImage(with: URL(string: fruitInfo[indexPath.row].itemImage))
-            cell.allPriceLabel.text =  "\(fruitInfo[indexPath.row].itemPrice!) AED"
-            cell.allDetailLabel.text = fruitInfo[indexPath.row].itemDetail
-            cell.allQuantityLabel.text = "per \(fruitInfo[indexPath.row].itemWeight!)"
+            imageView.sd_setImage(with: URL(string: selectedItems[indexPath.row].itemImage))
+            cell.allPriceLabel.text =  "\(selectedItems[indexPath.row].itemPrice!) AED"
+            cell.allDetailLabel.text = selectedItems[indexPath.row].itemDetail
+            cell.allQuantityLabel.text = "per \(selectedItems[indexPath.row].itemWeight!)"
             cell.layer.cornerRadius = 15
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.gray.cgColor
@@ -175,24 +158,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             cell.allPriceLabel.layer.borderColor = UIColor.gray.cgColor
             cell.addItem.tag = indexPath.row
             cell.hideViewAddItemButton.tag = indexPath.row
-            if fruitInfo[indexPath.row].itemCount == 0 {
+            if selectedItems[indexPath.row].itemCount == 0 {
                 cell.hideView.alpha = 0
             } else {
                 cell.hideView.alpha = 1
-                cell.allCountLabel.text = "\( self.fruitInfo[indexPath.row].itemCount!)"
+                cell.allCountLabel.text = "\( self.selectedItems[indexPath.row].itemCount!)"
             }
             cell.watchForClickHandler(completion: {index in
                 if index == 0 {
                     cell.hideView.alpha = 1
-                    Trolley.shared.addItemToTrolley(item: self.fruitInfo[indexPath.row])
-                    cell.allCountLabel.text = "\( self.fruitInfo[indexPath.row].itemCount!)"
+                    Trolley.shared.addItemToTrolley(item: self.selectedItems[indexPath.row])
+                    cell.allCountLabel.text = "\( self.selectedItems[indexPath.row].itemCount!)"
                 }else {
-                    Trolley.shared.removeItemToTrolley(trolleyItem: self.fruitInfo[indexPath.row])
-                    self.fruitInfo[indexPath.row].itemCount =  self.fruitInfo[indexPath.row].itemCount - 1
-                    if  self.fruitInfo[indexPath.row].itemCount < 1 {
+                    Trolley.shared.removeItemToTrolley(trolleyItem: self.selectedItems[indexPath.row])
+                    self.selectedItems[indexPath.row].itemCount =  self.selectedItems[indexPath.row].itemCount - 1
+                    if  self.selectedItems[indexPath.row].itemCount < 1 {
                         cell.hideView.alpha = 0
                     } else {
-                        cell.allCountLabel.text = "\( self.fruitInfo[indexPath.row].itemCount!)"
+                        cell.allCountLabel.text = "\( self.selectedItems[indexPath.row].itemCount!)"
                     }
                     if Trolley.shared.price < 0 {
                         Trolley.shared.price = 0.0
@@ -203,7 +186,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             })
             return cell
             
-        } else if isVegetable == true {
+        }
+/* else if isVegetable == true {
             self.myCollectionView.register(UINib(nibName: "AllItemsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "allItemCollection")
             let cell : AllItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "allItemCollection", for: indexPath) as! AllItemsCollectionViewCell
             // sdWeb Image
@@ -292,7 +276,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             })
             return cell
         }
-    }
+    }*/
     
     // Search Bar Fuctions
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -304,52 +288,56 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         mySearchBar.resignFirstResponder()
         return true
     }
-    // Outlet Function
     
+    func popHideZeroAlpha() {
+        popUpHideView.alpha = 0
+        popUpHideView2.alpha = 0
+        
+    }
+    func popHideWithAlphaOne() {
+        popUpHideView.alpha = 1
+        popUpHideView2.alpha = 1
+        
+    }
+    // Outlet Function
     @IBAction func didTapPopupViewLeftArrow(_ sender: UIButton) {
-        if isFruit == true {
-            if popUpCount > 0 && popUpCount < fruitInfo.count{
+      //  if isFruit == true {
+            if popUpCount > 0 && popUpCount < selectedItems.count{
                 popUpCount = popUpCount - 1
-                if fruitInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                if selectedItems[popUpCount].itemCount == 0 {
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
-                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                    popHideWithAlphaOne()
+                    popUpViewCountLabel.text = "\(selectedItems[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//
                 let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-                imageView.sd_setImage(with: URL(string: (fruitInfo[popUpCount].itemImage)!))
-                popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
-                popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
-                popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemWeight!)"
+                imageView.sd_setImage(with: URL(string: (selectedItems[popUpCount].itemImage)!))
+                popUpViewPriceLabel.text = "\(selectedItems[popUpCount].itemPrice!) AED"
+                popUpViewDetailLabel.text = selectedItems[popUpCount].itemDetail
+                popUpViewWeightLabel.text = "per \(selectedItems[popUpCount].itemWeight!)"
             } else {
-                popUpCount = fruitInfo.count - 1
-                if fruitInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                popUpCount = selectedItems.count - 1
+                if selectedItems[popUpCount].itemCount == 0 {
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
-                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                    popHideWithAlphaOne()
+                    popUpViewCountLabel.text = "\(selectedItems[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
                 let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-                imageView.sd_setImage(with: URL(string: (fruitInfo[popUpCount].itemImage)!))
-                popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
-                popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
-                popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemWeight!)"
+                imageView.sd_setImage(with: URL(string: (selectedItems[popUpCount].itemImage)!))
+                popUpViewPriceLabel.text = "\(selectedItems[popUpCount].itemPrice!) AED"
+                popUpViewDetailLabel.text = selectedItems[popUpCount].itemDetail
+                popUpViewWeightLabel.text = "per \(selectedItems[popUpCount].itemWeight!)"
             }
-        } else if isVegetable == true {
+        }/* else if isVegetable == true {
             if popUpCount > 0 && popUpCount < vegetableInfo.count{
                 popUpCount = popUpCount - 1
                 if vegetableInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -359,11 +347,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             } else {
                 popUpCount = vegetableInfo.count - 1
                 if vegetableInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -378,11 +364,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             if popUpCount > 0 && popUpCount < allItemInfo.count{
                 popUpCount = popUpCount - 1
                 if allItemInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -395,11 +379,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }else {
                 popUpCount = allItemInfo.count - 1
                 if allItemInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -411,51 +393,45 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             
         }
-    }
+    }*/
     @IBAction func didTapPopUpViewRightArrow(_ sender: UIButton) {
-        if isFruit == true {
-            if popUpCount < fruitInfo.count - 1 && popUpCount >= 0 {
+       // if isFruit == true {
+            if popUpCount < selectedItems.count - 1 && popUpCount >= 0 {
                 popUpCount = popUpCount + 1
-                if fruitInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                if selectedItems[popUpCount].itemCount == 0 {
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
-                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                    popHideWithAlphaOne()
+                    popUpViewCountLabel.text = "\(selectedItems[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
                 let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-                imageView.sd_setImage(with: URL(string: (fruitInfo[popUpCount].itemImage)!))
-                popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
-                popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
-                popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemWeight!)"
+                imageView.sd_setImage(with: URL(string: (selectedItems[popUpCount].itemImage)!))
+                popUpViewPriceLabel.text = "\(selectedItems[popUpCount].itemPrice!) AED"
+                popUpViewDetailLabel.text = selectedItems[popUpCount].itemDetail
+                popUpViewWeightLabel.text = "per \(selectedItems[popUpCount].itemWeight!)"
             } else {
                 popUpCount = 0
-                if fruitInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                if selectedItems[popUpCount].itemCount == 0 {
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
-                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                    popHideWithAlphaOne()
+                    popUpViewCountLabel.text = "\(selectedItems[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
                 let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
-                imageView.sd_setImage(with: URL(string: (fruitInfo[popUpCount].itemImage)!))
-                popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
-                popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
-                popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemWeight!)"
+                imageView.sd_setImage(with: URL(string: (selectedItems[popUpCount].itemImage)!))
+                popUpViewPriceLabel.text = "\(selectedItems[popUpCount].itemPrice!) AED"
+                popUpViewDetailLabel.text = selectedItems[popUpCount].itemDetail
+                popUpViewWeightLabel.text = "per \(selectedItems[popUpCount].itemWeight!)"
             }
-        } else if isVegetable == true {
+        } /*else if isVegetable == true {
             if popUpCount < vegetableInfo.count - 1 && popUpCount >= 0 {
                 popUpCount = popUpCount + 1
                 if vegetableInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -467,11 +443,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             } else {
                 popUpCount = 0
                 if vegetableInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//
@@ -486,11 +460,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             if popUpCount >= 0 && popUpCount < allItemInfo.count - 1   {
                 popUpCount = popUpCount + 1
                 if allItemInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -503,11 +475,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }else {
                 popUpCount = 0
                 if allItemInfo[popUpCount].itemCount == 0 {
-                    popUpHideView.alpha = 0
-                    popUpHideView2.alpha = 0
+                    popHideZeroAlpha()
                 } else {
-                    popUpHideView.alpha = 1
-                    popUpHideView2.alpha = 1
+                    popHideWithAlphaOne()
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -519,16 +489,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             
         }
-    }
+    }*/
     @IBAction func didTapPopUpViewAddButton(_ sender: Any) {
         self.popUpHideView.alpha = 1
         self.popUpHideView2.alpha = 1
         if isFruit == true {
-            popUpItemDisplay(itemType: fruitInfo)
+            popUpItemDisplay(itemType: selectedItems)
         } else if isVegetable == true {
-            popUpItemDisplay(itemType: vegetableInfo)
+            popUpItemDisplay(itemType: selectedItems)
         } else {
-            popUpItemDisplay(itemType: allItemInfo)
+            popUpItemDisplay(itemType: selectedItems)
         }
     }
     
@@ -537,45 +507,21 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         myCollectionView.reloadData()
     }
     @IBAction func allItemSelected(_ sender: UIButton) {
-        allItemButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-        fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        allItemView.backgroundColor = UIColor.green
-        fruitView.backgroundColor = UIColor.white
-        vegetableView.backgroundColor = UIColor.white
-        isVegetable = false
-        isFruit = false
-        myCollectionView.reloadData()
+        buttonEffectOnUI("all")
+        selectedItems = Trolley.shared.allItemInfo
     }
     @IBAction func fruitSelected(_ sender: UIButton) {
-        allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-        vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        allItemView.backgroundColor = UIColor.white
-        fruitView.backgroundColor = UIColor.green
-        vegetableView.backgroundColor = UIColor.white
-        isVegetable = false
-        isFruit = true
-        myCollectionView.reloadData()
+        buttonEffectOnUI("fruit")
+        selectedItems = Trolley.shared.getFruits()
     }
     @IBAction func vegetableSelected(_ sender: UIButton) {
-        allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        vegetableButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-        allItemView.backgroundColor = UIColor.white
-        fruitView.backgroundColor = UIColor.white
-        vegetableView.backgroundColor = UIColor.green
-        isVegetable = true
-        isFruit = false
-        myCollectionView.reloadData()
+        buttonEffectOnUI("veg")
+        selectedItems = Trolley.shared.getVegitables()
     }
     @IBAction func didTapTrolleyButton(_ sender: UIButton) {
         let apptabbarvc = self.tabBarController as? AppTabbarControllerView
         apptabbarvc?.previousIndex = apptabbarvc?.selectedIndex
         self.tabBarController?.selectedIndex = 4
-        
-       /* let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
-        self.navigationController?.pushViewController(secondViewController, animated: true)*/
     }
     @IBAction func sideMenuButtonClicked(_ sender: UIButton) {
         self.handelLogout()
@@ -584,6 +530,52 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         Trolley.shared.addItemToTrolley(item: itemType[popUpCount])
         popUpViewCountLabel.text = "\(itemType[popUpCount].itemCount!)"
         homeTotalPrice.text = "\(Trolley.shared.price)"
+    }
+    // button selection function
+    func buttonEffectOnUI(_ type: String) {
+        if type == "veg" {
+            allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            vegetableButton.setTitleColor(UIColor.green, for: UIControlState.normal)
+            allItemView.backgroundColor = UIColor.white
+            fruitView.backgroundColor = UIColor.white
+            vegetableView.backgroundColor = UIColor.green
+            isVegetable = true
+            isFruit = false
+            myCollectionView.reloadData()
+        } else if type == "fruit" {
+            allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
+            vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            allItemView.backgroundColor = UIColor.white
+            fruitView.backgroundColor = UIColor.green
+            vegetableView.backgroundColor = UIColor.white
+            isVegetable = false
+            isFruit = true
+            myCollectionView.reloadData()
+        } else {
+            allItemButton.setTitleColor(UIColor.green, for: UIControlState.normal)
+            fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            allItemView.backgroundColor = UIColor.green
+            fruitView.backgroundColor = UIColor.white
+            vegetableView.backgroundColor = UIColor.white
+            isVegetable = false
+            isFruit = false
+            myCollectionView.reloadData()
+        }
+        
+    }
+    
+    // collection view POpUp SetUp
+    func collectionViewSetting(item: ItemInfo)   {
+        popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[indexPath.row].itemImage
+        let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
+        imageView.sd_setImage(with: URL(string: (item.itemImage)!))
+        popUpViewPriceLabel.text = "\(item.itemPrice!) AED"
+        popUpViewDetailLabel.text = item.itemDetail
+        popUpViewWeightLabel.text = "per \(item.itemWeight!)"
+        
     }
 }
 
@@ -626,5 +618,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
  }).resume()
  
  }*/
+// ccccc111111
+/*    popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[indexPath.row].itemImage
+ let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
+ imageView.sd_setImage(with: URL(string: (fruitInfo[indexPath.row].itemImage)!))
+ popUpViewPriceLabel.text = "\(fruitInfo[indexPath.row].itemPrice!) AED"
+ popUpViewDetailLabel.text = fruitInfo[indexPath.row].itemDetail
+ popUpViewWeightLabel.text = "per \(fruitInfo[indexPath.row].itemWeight!)"*/
+// ccccc222222
+/*let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
+ imageView.sd_setImage(with: URL(string: (vegetableInfo[indexPath.row].itemImage)!))
+ popUpViewPriceLabel.text = "\(vegetableInfo[indexPath.row].itemPrice!) AED"
+ popUpViewDetailLabel.text = vegetableInfo[indexPath.row].itemDetail
+ popUpViewWeightLabel.text = "per \(allItemInfo[indexPath.row].itemWeight!)"*/
+/// cccccc333333
 
-
+/*popUpViewImage.image = #imageLiteral(resourceName: "loading")
+ let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
+ imageView.sd_setImage(with: URL(string: (allItemInfo[indexPath.row].itemImage)!))
+ popUpViewPriceLabel.text = "\(allItemInfo[indexPath.row].itemPrice!) AED"
+ popUpViewDetailLabel.text = allItemInfo[indexPath.row].itemDetail
+ popUpViewWeightLabel.text = "per \(allItemInfo[indexPath.row].itemWeight!)"*/

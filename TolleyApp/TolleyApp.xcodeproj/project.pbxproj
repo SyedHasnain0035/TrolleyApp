@@ -150,7 +150,6 @@
 				41E21F9F1F31F92F00DFA04A /* History */,
 				41E21F9E1F31F92700DFA04A /* Account */,
 				41E21F9B1F31F8F400DFA04A /* Search */,
-				41E21F981F31F7C600DFA04A /* Home */,
 				41E21F841F31E57300DFA04A /* AppDelegate.swift */,
 				41E21F8D1F31E57300DFA04A /* Assets.xcassets */,
 				4126C0EC1F3A111400D761B3 /* Main.storyboard */,
@@ -183,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				41E21FA51F31F97000DFA04A /* AccountViewController.swift */,
+				41E21F981F31F7C600DFA04A /* Home */,
 				415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */,
 			);
 			name = Account;

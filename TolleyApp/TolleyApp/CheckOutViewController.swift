@@ -61,8 +61,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         } catch let logoutError {
             print(logoutError)
         }
-        let logout = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-        self.navigationController?.pushViewController(logout, animated: true)
+        AlertView.showLoginAlert(self)
     }
     @IBAction func didTapBackButton(_ sender: UIButton) {
         //_ = navigationController?.popViewController(animated: true)

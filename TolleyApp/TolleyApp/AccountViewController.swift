@@ -39,6 +39,7 @@ class AccountViewController: UIViewController {
             alertController.addAction(defaultAction)
             
             present(alertController, animated: true, completion: nil)
+           // self.tabBarController?.selectedIndex = 1
             
         } else {
             Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { (user, error) in
@@ -83,11 +84,11 @@ class AccountViewController: UIViewController {
                 let count = 0
                 let itemSave = ItemInfo(itemId: dic["ItemId"] as! String,itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, itemActive: dic["Active"] as! Int, itemCount: count )
                 if itemSave.itemActive == 1 {
-                    if  itemSave.itemType == "Fruit" {
+                   /* if  itemSave.itemType == "Fruit" {
                         Trolley.shared.fruitItem.append(itemSave)
                     } else {
                         Trolley.shared.vegetableItem.append(itemSave)
-                    }
+                    }*/
                     Trolley.shared.allItemInfo.append(itemSave)
                     
                 }
@@ -99,8 +100,6 @@ class AccountViewController: UIViewController {
     }
     func goToNextVC() {
        self.tabBarController?.selectedIndex = 1
-    /*    let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-       
-        self.navigationController?.pushViewController(secondViewController, animated: true)*/
+   
     }
 }

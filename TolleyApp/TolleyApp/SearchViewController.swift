@@ -53,8 +53,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         } catch let logoutError {
             print(logoutError)
         }
-        let logout = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-        self.navigationController?.pushViewController(logout, animated: true)
+    AlertView.showLoginAlert(self) 
     }
     @IBAction func didTapMenuButton(_ sender: UIButton) {
     }

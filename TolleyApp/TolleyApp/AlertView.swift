@@ -27,7 +27,7 @@ class AlertView: UIView {
      return view
     }
     static func showAleßrt(with image: UIImage, price: String, detail: String, weight: String, buttons: [String], completion: @escaping (Int)-> Void){
-        var myAlert = AlertView.initWithNib()
+        let myAlert = AlertView.initWithNib()
         myAlert.itemImage.image = image
         myAlert.itemPriceLabel.text = price
         myAlert.itemDetailLabel.text = detail
@@ -36,7 +36,7 @@ class AlertView: UIView {
         
     }
     static func showAleßrt(onView: UIView, image: UIImage, price: String, detail: String, weight: String, buttons: [String], completion: @escaping (Int)-> Void){
-        var myAlert = AlertView.initWithNib()
+        let myAlert = AlertView.initWithNib()
         myAlert.itemImage.image = image
         myAlert.itemPriceLabel.text = price
         myAlert.itemDetailLabel.text = detail
@@ -44,5 +44,14 @@ class AlertView: UIView {
         myAlert.clickHandler = completion
         onView.addSubview(myAlert)
         
+    }
+    static   func showLoginAlert(_ onView: UIViewController) {
+        let alert = UIAlertController(title: "Error", message: "You are Not Login Please Login First", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            
+            onView.tabBarController?.selectedIndex = 0
+        }
+        alert.addAction(action)
+        onView.present(alert, animated: true, completion: nil)
     }
 }

@@ -16,12 +16,23 @@ class Trolley: NSObject {
     static let shared = Trolley()
     var items = [ItemInfo]()
     var allItemInfo = [ItemInfo]()
-    var fruitItem = [ItemInfo]()
-    var vegetableItem = [ItemInfo]()
     var price = 0.0
     var itCount = 0
     var noItem = 0
     override init() {
+    }
+    
+    func getVegitables() -> [ItemInfo] {
+        let vegitables = allItemInfo.filter({
+            $0.itemType == "Vegetable"
+        })
+        return vegitables
+    }
+    func getFruits() -> [ItemInfo] {
+        let vegitables = allItemInfo.filter({
+            $0.itemType == "Fruit"
+        })
+        return vegitables
     }
     func addItemToTrolley(item: ItemInfo)  {
         if items.count == 0 {
@@ -58,8 +69,6 @@ class Trolley: NSObject {
     }
     func deleteAll () {
         allItemInfo = []
-        fruitItem = []
-        vegetableItem = []
     }
    }
 extension String {
