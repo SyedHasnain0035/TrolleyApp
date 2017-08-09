@@ -25,6 +25,8 @@ class HistoryViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func didTapSingUpButton(_ sender: UIButton) {
+    }
     /*
     // MARK: - Navigation
 

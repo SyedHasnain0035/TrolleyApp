@@ -22,6 +22,8 @@ class AccountViewController: UIViewController {
     }
     
 
+    @IBAction func didTapSingUpButton(_ sender: UIButton) {
+    }
     @IBAction func didTapBackButton(_ sender: UIButton) {
     self.dismiss(animated: true, completion: nil)
     }

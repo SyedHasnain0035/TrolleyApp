@@ -22,7 +22,7 @@ class Trolley: NSObject {
             items.append(item)
             price = price + item.itemPrice
              item.itemCount = item.itemCount + 1
-            noItem = noItem + 1
+            
             return
         }
         var found = false
@@ -31,7 +31,7 @@ class Trolley: NSObject {
                 found = true
                 item.itemCount = item.itemCount + 1
                 price = price + item.itemPrice
-                noItem = noItem + 1
+                
             } else {
                found = false
             }
@@ -41,7 +41,7 @@ class Trolley: NSObject {
             items.append(item)
             price = price + item.itemPrice
             item.itemCount = item.itemCount + 1
-            noItem = noItem + 1
+            
         }
     }
     func removeItemToTrolley(trolleyItem: ItemInfo)  {
@@ -49,11 +49,6 @@ class Trolley: NSObject {
             if item.itemId == trolleyItem.itemId {
                 noItem  =  noItem - 1
                 price = price - item.itemPrice
-                
-                if noItem < 0 {
-                    noItem = 0
-                    price = 0.0
-                }
                 break
             }
         }

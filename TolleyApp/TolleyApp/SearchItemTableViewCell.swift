@@ -33,20 +33,9 @@ class SearchItemTableViewCell: UITableViewCell {
     @IBAction func didTapReduceButton(_ sender: UIButton) {
         guard let completion = self.clickHandler else {return}
         completion(1)
-        /*if Trolley.shared.noItem == 0 {
-            
-        } else {
-            Trolley.shared.noItem = Trolley.shared.noItem - 1
-            countLabel.text = "\(Trolley.shared.noItem)"
-            
-        
-        }*/
     }
     @IBAction func didTapAddButton(_ sender: UIButton) {
         guard let completion = self.clickHandler else {return}
         completion(0)
-        //Trolley.shared.noItem = Trolley.shared.noItem + 1
-       // countLabel.text = "\(Trolley.shared.noItem)"
-        
     }
 }
