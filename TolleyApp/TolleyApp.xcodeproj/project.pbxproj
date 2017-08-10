@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4126C0EC1F3A111400D761B3 /* Main.storyboard */; };
+		41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41443B981F3CAC8000F22111 /* GoogleService-Info.plist */; };
 		415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */; };
 		416B775F1F330F16008D28B2 /* AllItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B775D1F330F16008D28B2 /* AllItemsCollectionViewCell.swift */; };
 		416B77601F330F16008D28B2 /* AllItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416B775E1F330F16008D28B2 /* AllItemsCollectionViewCell.xib */; };
@@ -26,10 +27,13 @@
 		41E21FA61F31F97000DFA04A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E21FA51F31F97000DFA04A /* AccountViewController.swift */; };
 		41F407DF1F3B228400F319EA /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F407DE1F3B228400F319EA /* ProductViewController.swift */; };
 		41F407E11F3B3F0E00F319EA /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F407E01F3B3F0E00F319EA /* AlertViewController.swift */; };
+		51E6B098074F0959E784A495 /* Pods_TolleyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CF0C7559A2AF9CA111055D /* Pods_TolleyApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4126C0EC1F3A111400D761B3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.release.xcconfig"; sourceTree = "<group>"; };
+		41443B981F3CAC8000F22111 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		416B775D1F330F16008D28B2 /* AllItemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		416B775E1F330F16008D28B2 /* AllItemsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllItemsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 		41E21FA51F31F97000DFA04A /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		41F407DE1F3B228400F319EA /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		41F407E01F3B3F0E00F319EA /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		8793316C5C0A51DDF53D232F /* Pods-TolleyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A1CF0C7559A2AF9CA111055D /* Pods_TolleyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TolleyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E6B098074F0959E784A495 /* Pods_TolleyApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +102,8 @@
 			children = (
 				41E21F831F31E57300DFA04A /* TolleyApp */,
 				41E21F821F31E57300DFA04A /* Products */,
+				A033BA6FCED635EE990AC714 /* Pods */,
+				B347734BB83A410564DFD334 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +131,7 @@
 				41E21F8D1F31E57300DFA04A /* Assets.xcassets */,
 				4126C0EC1F3A111400D761B3 /* Main.storyboard */,
 				41E21F8F1F31E57300DFA04A /* LaunchScreen.storyboard */,
+				41443B981F3CAC8000F22111 /* GoogleService-Info.plist */,
 				41E21F921F31E57300DFA04A /* Info.plist */,
 			);
 			path = TolleyApp;
@@ -178,6 +188,23 @@
 			name = AlertVC;
 			sourceTree = "<group>";
 		};
+		A033BA6FCED635EE990AC714 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8793316C5C0A51DDF53D232F /* Pods-TolleyApp.debug.xcconfig */,
+				412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B347734BB83A410564DFD334 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1CF0C7559A2AF9CA111055D /* Pods_TolleyApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,9 +212,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41E21F951F31E57300DFA04A /* Build configuration list for PBXNativeTarget "TolleyApp" */;
 			buildPhases = (
+				CE50B03613118F5DF8F47A1D /* [CP] Check Pods Manifest.lock */,
 				41E21F7D1F31E57300DFA04A /* Sources */,
 				41E21F7E1F31E57300DFA04A /* Frameworks */,
 				41E21F7F1F31E57300DFA04A /* Resources */,
+				84D0AD37BF2F9B98A585CC32 /* [CP] Embed Pods Frameworks */,
+				1B780862B759904113D4DF68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,6 +269,7 @@
 			files = (
 				41E21F911F31E57300DFA04A /* LaunchScreen.storyboard in Resources */,
 				4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */,
+				41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */,
 				41E21F8E1F31E57300DFA04A /* Assets.xcassets in Resources */,
 				416B776A1F332BB9008D28B2 /* SearchItemTableViewCell.xib in Resources */,
 				416B77601F330F16008D28B2 /* AllItemsCollectionViewCell.xib in Resources */,
@@ -246,6 +277,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B780862B759904113D4DF68 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84D0AD37BF2F9B98A585CC32 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE50B03613118F5DF8F47A1D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TolleyApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41E21F7D1F31E57300DFA04A /* Sources */ = {
@@ -378,6 +469,7 @@
 		};
 		41E21F961F31E57300DFA04A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8793316C5C0A51DDF53D232F /* Pods-TolleyApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TolleyApp/Info.plist;
@@ -392,6 +484,7 @@
 		};
 		41E21F971F31E57300DFA04A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TolleyApp/Info.plist;

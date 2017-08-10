@@ -505,6 +505,11 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCy-MI-CXB">
+                                                <rect key="frame" x="0.0" y="11" width="355" height="216"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </pickerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -559,6 +564,11 @@
                             <constraint firstAttribute="trailing" secondItem="APt-5n-hAZ" secondAttribute="trailing" id="vdJ-TF-1G1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstNameTextField" destination="NYr-Se-1J1" id="3fn-RJ-5Ax"/>
+                        <outlet property="titlePicker" destination="oCy-MI-CXB" id="0uc-C7-feJ"/>
+                        <outlet property="titleTextField" destination="fkM-Ay-Day" id="yj0-Hg-c9q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7z-l7-G1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1618,7 +1628,6 @@
         <!--Home-->
         <scene sceneID="Xpc-uc-NUA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="097-Ni-TQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="4g9-eX-LRQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="home_icon" id="acW-dT-cKf"/>
                     <toolbarItems/>
@@ -1633,6 +1642,7 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="i7R-F4-jKl"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="097-Ni-TQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2273" y="427"/>
         </scene>
