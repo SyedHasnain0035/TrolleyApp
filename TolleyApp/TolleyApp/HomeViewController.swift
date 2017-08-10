@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     // OutLets
+    @IBOutlet weak var popUpViewCountLabel: UILabel!
+    @IBOutlet weak var popUpHideView2: UIView!
     @IBOutlet weak var popUpHideView: UIView!
     @IBOutlet weak var popUpViewImage: UIImageView!
     @IBOutlet weak var popUpView: UIView!
@@ -61,16 +63,40 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.popUpView.alpha = 8.5
         popUpCount = indexPath.row
         if isFruit == true {
+            if fruitInfo[indexPath.row].itemCount == 0 {
+                popUpHideView.alpha = 0
+                popUpHideView2.alpha = 0
+            } else {
+                popUpHideView.alpha = 0.9
+                popUpHideView2.alpha = 0.7
+                popUpViewCountLabel.text = "\(fruitInfo[indexPath.row].itemCount!)"
+            }
             popUpViewImage.image = fruitInfo[indexPath.row].itemImage
             popUpViewPriceLabel.text = "\(fruitInfo[indexPath.row].itemPrice!) AED"
             popUpViewDetailLabel.text = fruitInfo[indexPath.row].itemDetail
             popUpViewWeightLabel.text = "per \(fruitInfo[indexPath.row].itemQuantity!)"
         } else if isVegetable == true {
+            if vegetableInfo[indexPath.row].itemCount == 0 {
+                popUpHideView.alpha = 0
+                popUpHideView2.alpha = 0
+            } else {
+                popUpHideView.alpha = 0.9
+                popUpHideView2.alpha = 0.7
+                popUpViewCountLabel.text = "\(vegetableInfo[indexPath.row].itemCount!)"
+            }
             popUpViewImage.image = vegetableInfo[indexPath.row].itemImage
             popUpViewPriceLabel.text = "\(vegetableInfo[indexPath.row].itemPrice!) AED"
             popUpViewDetailLabel.text = vegetableInfo[indexPath.row].itemDetail
             popUpViewWeightLabel.text = "per \(allItemInfo[indexPath.row].itemQuantity!)"
         } else {
+            if allItemInfo[indexPath.row].itemCount == 0 {
+                popUpHideView.alpha = 0
+                popUpHideView2.alpha = 0
+            } else {
+                popUpHideView.alpha = 0.9
+                popUpHideView2.alpha = 0.7
+                popUpViewCountLabel.text = "\(allItemInfo[indexPath.row].itemCount!)"
+            }
             popUpViewImage.image = allItemInfo[indexPath.row].itemImage
             popUpViewPriceLabel.text = "\(allItemInfo[indexPath.row].itemPrice!) AED"
             popUpViewDetailLabel.text = allItemInfo[indexPath.row].itemDetail
@@ -235,12 +261,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if isFruit == true {
             if popUpCount > 0 && popUpCount < fruitInfo.count{
                 popUpCount = popUpCount - 1
+                if fruitInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = fruitInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
                 popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemQuantity!)"
             } else {
                 popUpCount = fruitInfo.count - 1
+                if fruitInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = fruitInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
@@ -249,12 +291,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } else if isVegetable == true {
             if popUpCount > 0 && popUpCount < vegetableInfo.count{
                 popUpCount = popUpCount - 1
+                if vegetableInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = vegetableInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(vegetableInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = vegetableInfo[popUpCount].itemDetail
                 popUpViewWeightLabel.text = "per \(vegetableInfo[popUpCount].itemQuantity!)"
             } else {
                 popUpCount = vegetableInfo.count - 1
+                if vegetableInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = vegetableInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(vegetableInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = vegetableInfo[popUpCount].itemDetail
@@ -264,6 +322,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } else {
             if popUpCount > 0 && popUpCount < allItemInfo.count{
                 popUpCount = popUpCount - 1
+                if allItemInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = allItemInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(allItemInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = allItemInfo[popUpCount].itemDetail
@@ -271,6 +337,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 
             }else {
                 popUpCount = allItemInfo.count - 1
+                if allItemInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = allItemInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(allItemInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = allItemInfo[popUpCount].itemDetail
@@ -280,16 +354,31 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     @IBAction func didTapPopUpViewRightArrow(_ sender: UIButton) {
-        
         if isFruit == true {
             if popUpCount < fruitInfo.count - 1 && popUpCount >= 0 {
                 popUpCount = popUpCount + 1
+                if fruitInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = fruitInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
                 popUpViewWeightLabel.text = "per \(fruitInfo[popUpCount].itemQuantity!)"
             } else {
                 popUpCount = 0
+                if fruitInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = fruitInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(fruitInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = fruitInfo[popUpCount].itemDetail
@@ -298,12 +387,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } else if isVegetable == true {
             if popUpCount < vegetableInfo.count - 1 && popUpCount >= 0 {
                 popUpCount = popUpCount + 1
+                if vegetableInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = vegetableInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(vegetableInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = vegetableInfo[popUpCount].itemDetail
                 popUpViewWeightLabel.text = "per \(vegetableInfo[popUpCount].itemQuantity!)"
             } else {
                 popUpCount = 0
+                if vegetableInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = vegetableInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(vegetableInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = vegetableInfo[popUpCount].itemDetail
@@ -313,6 +418,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } else {
             if popUpCount >= 0 && popUpCount < allItemInfo.count - 1   {
                 popUpCount = popUpCount + 1
+                if allItemInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = allItemInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(allItemInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = allItemInfo[popUpCount].itemDetail
@@ -320,6 +433,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 
             }else {
                 popUpCount = 0
+                if allItemInfo[popUpCount].itemCount == 0 {
+                    popUpHideView.alpha = 0
+                    popUpHideView2.alpha = 0
+                } else {
+                    popUpHideView.alpha = 0.9
+                    popUpHideView2.alpha = 0.7
+                    popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
+                }
                 popUpViewImage.image = allItemInfo[popUpCount].itemImage
                 popUpViewPriceLabel.text = "\(allItemInfo[popUpCount].itemPrice!) AED"
                 popUpViewDetailLabel.text = allItemInfo[popUpCount].itemDetail
@@ -329,10 +450,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     @IBAction func didTapPopUpViewAddButton(_ sender: Any) {
-        self.popUpHideView.alpha = 8.5
+        self.popUpHideView.alpha = 0.9
+        self.popUpHideView2.alpha = 0.5
+        if isFruit == true {
+            popUpItemDisplay(itemType: fruitInfo)
+        } else if isVegetable == true {
+            popUpItemDisplay(itemType: vegetableInfo)
+        } else {
+            popUpItemDisplay(itemType: allItemInfo)
+        }
     }
+   
     @IBAction func didTapPopUpCrossButton(_ sender: UIButton) {
         self.popUpView.alpha = 0
+        myCollectionView.reloadData()
     }
     @IBAction func allItemSelected(_ sender: UIButton) {
         allItemButton.setTitleColor(UIColor.green, for: UIControlState.normal)
@@ -371,6 +502,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
         self.navigationController?.pushViewController(secondViewController, animated: true)
     }
+    func  popUpItemDisplay(itemType: [ItemInfo])  {
+        Trolley.shared.addItemToTrolley(item: itemType[popUpCount])
+        popUpViewCountLabel.text = "\(itemType[popUpCount].itemCount!)"
+        homeTotalPrice.text = "\(Trolley.shared.price)"
+    }
     func setItemValues()  {
         fruitInfo = [ItemInfo(itemId: "0001", itemDetail: "Banana Banana",itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "banana"), itemCount: 0),
                      ItemInfo(itemId: "fru0002", itemDetail: "appricot appricot", itemPrice: 4.5 , itemQuantity: " 1.5 Kg", itemType: "Fruit",itemImage: #imageLiteral(resourceName: "appricot"), itemCount: 0),
@@ -381,15 +517,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                           ItemInfo(itemId: "0012", itemDetail: "mixVeg mixVeg", itemPrice: 4.5, itemQuantity: " 1.5 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "mixVeg"), itemCount: 0),
                           ItemInfo(itemId: "0013", itemDetail: "carrot carrot", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "carrot"), itemCount: 0),
                           ItemInfo(itemId: "0014", itemDetail: "tomato tomato", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "tomato"), itemCount: 0)]
-        
-        allItemInfo =   [ItemInfo(itemId: "fru0001",itemDetail: "Banana Banana", itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "banana"), itemCount: 0),
-                         ItemInfo(itemId: "fru0002", itemDetail: "appricot appricot", itemPrice: 4.5 , itemQuantity: " 1.5 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "appricot"), itemCount: 0),
-                         ItemInfo(itemId: "fru0003", itemDetail: "grap grap", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Fruit", itemImage: #imageLiteral(resourceName: "grap"), itemCount: 0),
-                         ItemInfo( itemId: "fru0004", itemDetail: "pear pear", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Fruit",itemImage: #imageLiteral(resourceName: "pear"), itemCount: 0),
-                         ItemInfo(itemId: "0011", itemDetail: "celiflower celiflower", itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "celiflower"), itemCount: 0),
-                         ItemInfo(itemId: "0012", itemDetail: "mixVeg mixVeg", itemPrice: 4.5, itemQuantity: " 1.5 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "mixVeg"), itemCount: 0),
-                         ItemInfo(itemId: "0013", itemDetail: "carrot carrot", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "carrot"), itemCount: 0),
-                         ItemInfo(itemId: "0014", itemDetail: "tomato tomato", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "tomato"), itemCount: 0)]
+        allItemInfo = fruitInfo + vegetableInfo
     }
     
     // Aler View
