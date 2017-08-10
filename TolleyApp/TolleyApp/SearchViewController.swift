@@ -12,39 +12,47 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var pageTitleLabel: UILabel!
     @IBOutlet weak var trolleyLabel: UIButton!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var myTabelView: UITableView!
-    var totalPrice = 0
     var allItemInfo = [ItemInfo]()
+    var filterItem = [ItemInfo]()
+    let searcController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
         myTabelView.delegate = self
         myTabelView.dataSource = self
-        allItemInfo =   [ItemInfo(itemId: "fru0001",itemDetail: "Banana Banana", itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "banana"), itemCount: 0),
-                         ItemInfo(itemId: "fru0002", itemDetail: "appricot appricot", itemPrice: 4.5 , itemQuantity: " 1.5 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "appricot"), itemCount: 0),
-                         ItemInfo(itemId: "fru0003", itemDetail: "grap grap", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Fruit", itemImage: #imageLiteral(resourceName: "grap"), itemCount: 0),
-                         ItemInfo( itemId: "fru0004", itemDetail: "pear pear", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Fruit",itemImage: #imageLiteral(resourceName: "pear"), itemCount: 0),
-                         ItemInfo(itemId: "0011", itemDetail: "celiflower celiflower", itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "celiflower"), itemCount: 0),
-                         ItemInfo(itemId: "0012", itemDetail: "mixVeg mixVeg", itemPrice: 4.5, itemQuantity: " 1.5 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "mixVeg"), itemCount: 0),
-                         ItemInfo(itemId: "0013", itemDetail: "carrot carrot", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "carrot"), itemCount: 0),
-                         ItemInfo(itemId: "0014", itemDetail: "tomato tomato", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "tomato"), itemCount: 0)]
+        allItemInfo =   Trolley.shared.allItemInfo
+            self.basicTableViewHeaderSetting()
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.totalPriceLabel.text = "\(Trolley.shared.price)"
+        myTabelView.reloadData()
     }
     @IBAction func didTapMenuButton(_ sender: UIButton) {
     }
     @IBAction func didTapTrolleyButton(_ sender: UIButton) {
+        if Trolley.shared.price == 0.0 {
+            
+        } else {
+            performSegue(withIdentifier: "CheckOut", sender: nil)
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchBar.text == "" {
-            return 0
-        } else {
-            return allItemInfo.count
+       
+        if searcController.isActive && searcController.searchBar.text != ""  {
+            return filterItem.count
         }
-        
+        return allItemInfo.count
+    }
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filterItem = allItemInfo.filter{ item in
+            let typeMatch = ( scope == "All" ) || ( item.itemType == scope)
+            return typeMatch &&  item.itemDetail.lowercased().contains(searchText.lowercased())
+            
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("SearchItemTableViewCell", owner: self, options: nil)?.first as! SearchItemTableViewCell
@@ -54,16 +62,47 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         cell.backGroundView.layer.cornerRadius = 10
         cell.backGroundView.layer.borderWidth = 1
         cell.backGroundView.layer.borderColor = UIColor.gray.cgColor
-        cell.detailLabel.text = allItemInfo[indexPath.row].itemDetail
-        cell.itemImage.image = allItemInfo[indexPath.row].itemImage
-        cell.priceLabel.text = "\(allItemInfo[indexPath.row].itemPrice!) AED"
-        cell.weightLabel.text = allItemInfo[indexPath.row].itemQuantity
+        let all: ItemInfo
+        if searcController.isActive && searcController.searchBar.text != ""  {
+            all = filterItem[indexPath.row]
+        } else {
+            all = allItemInfo[indexPath.row]
+        }
+        cell.detailLabel.text = all.itemDetail
+        cell.itemImage.image = all.itemImage
+        cell.priceLabel.text = "\(all.itemPrice!) AED"
+        cell.weightLabel.text = all.itemQuantity
+        cell.countLabel.text = "\(all.itemCount!)"
+        cell.watchForClickHandler(completion: {index in
+            if index == 0 {
+                Trolley.shared.addItemToTrolley(item: self.allItemInfo[indexPath.row])
+                cell.countLabel.text = "\(self.allItemInfo[indexPath.row].itemCount!)"
+            }else {
+                Trolley.shared.removeItemToTrolley(trolleyItem: self.allItemInfo[indexPath.row])
+                self.allItemInfo[indexPath.row].itemCount =  self.allItemInfo[indexPath.row].itemCount - 1
+                if self.allItemInfo[indexPath.row].itemCount < 1 {
+                    self.allItemInfo[indexPath.row].itemCount = 0
+                    cell.countLabel.text = "\( self.allItemInfo[indexPath.row].itemCount!)"
+                } else {
+                    cell.countLabel.text = "\( self.allItemInfo[indexPath.row].itemCount!)"
+                }
+                if Trolley.shared.price < 0 {
+                    Trolley.shared.price = 0.0
+                }
+            }
+            
+            self.totalPriceLabel.text = "\(Trolley.shared.price)"
+        })
         return cell
 
     }
     // Search Bar Function
+   /* func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }*/
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBar.text == "" {
+            myTabelView.reloadData()
         } else {
             myTabelView.reloadData()
         }
@@ -72,9 +111,27 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if searchBar.text == "" {
+            myTabelView.reloadData()
         } else {
             myTabelView.reloadData()
         }
     }
-
+    func basicTableViewHeaderSetting()  {
+        searcController.searchResultsUpdater = self
+        searcController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        myTabelView.tableHeaderView = searcController.searchBar
+        myTabelView.tableHeaderView?.tintColor = UIColor.green
+        myTabelView.tableHeaderView?.backgroundColor = UIColor.green
+        searcController.searchBar.delegate = self
+        searcController.searchBar.barTintColor = UIColor.green
+        searcController.searchBar.placeholder = "Search for product and brands"
+    }
+}
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+       // let searcBar = searcController.searchBar
+        //let scope = searcBar.scopeButtonTitles![searcBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchText: searcController.searchBar.text!)
+    }
 }

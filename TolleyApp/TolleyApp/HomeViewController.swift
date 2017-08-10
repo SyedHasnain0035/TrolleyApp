@@ -245,15 +245,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
   
   // Search Bar Fuctions
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-    }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "SearchProductViewController") as! SearchProductViewController
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        performSegue(withIdentifier: "SearchProductViewController", sender: nil)
         mySearchBar.resignFirstResponder()
+    }
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+       performSegue(withIdentifier: "SearchProductViewController", sender: nil)
+        mySearchBar.resignFirstResponder()
+        return true
     }
     // Outlet Function
   
@@ -508,21 +507,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeTotalPrice.text = "\(Trolley.shared.price)"
     }
     func setItemValues()  {
-        fruitInfo = [ItemInfo(itemId: "0001", itemDetail: "Banana Banana",itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Fruit", itemImage: #imageLiteral(resourceName: "banana"), itemCount: 0),
-                     ItemInfo(itemId: "fru0002", itemDetail: "appricot appricot", itemPrice: 4.5 , itemQuantity: " 1.5 Kg", itemType: "Fruit",itemImage: #imageLiteral(resourceName: "appricot"), itemCount: 0),
-                     ItemInfo(itemId: "fru0003", itemDetail: "grap grap", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Fruit", itemImage: #imageLiteral(resourceName: "grap"), itemCount: 0),
-                     ItemInfo( itemId: "fru0004", itemDetail: "pear pear", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Fruit",itemImage: #imageLiteral(resourceName: "pear"), itemCount: 0)]
-        
-        vegetableInfo = [ ItemInfo(itemId: "0011", itemDetail: "celiflower celiflower", itemPrice: 3.5, itemQuantity: " 1 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "celiflower"), itemCount: 0),
-                          ItemInfo(itemId: "0012", itemDetail: "mixVeg mixVeg", itemPrice: 4.5, itemQuantity: " 1.5 Kg", itemType: "Veg",itemImage: #imageLiteral(resourceName: "mixVeg"), itemCount: 0),
-                          ItemInfo(itemId: "0013", itemDetail: "carrot carrot", itemPrice: 5.5, itemQuantity: " 2 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "carrot"), itemCount: 0),
-                          ItemInfo(itemId: "0014", itemDetail: "tomato tomato", itemPrice: 6.5, itemQuantity: " 2.5 Kg",itemType: "Veg",itemImage: #imageLiteral(resourceName: "tomato"), itemCount: 0)]
-        allItemInfo = fruitInfo + vegetableInfo
+        fruitInfo = Trolley.shared.fruitItem
+        vegetableInfo = Trolley.shared.vegetableItem
+        allItemInfo = Trolley.shared.allItemInfo
     }
-    
-    // Aler View
-    
-    
 }
 
 

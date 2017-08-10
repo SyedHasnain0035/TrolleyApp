@@ -33,6 +33,9 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillDisappear(_ animated: Bool) {
         myTabelView.reloadData()
     }
+    @IBAction func didTapBackButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     @IBAction func tollyButtonPressed(_ sender: UIButton) {
     }
     @IBAction func didTapCheckOutButton(_ sender: UIButton) {
