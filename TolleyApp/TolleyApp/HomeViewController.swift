@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     // OutLets
     @IBOutlet weak var popUpViewCountLabel: UILabel!
@@ -37,6 +39,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var isVegetable = false
     var allItem = true
     var popUpCount = 0
+    
+    // data base
+    var  handel: DatabaseHandle?
+    var ref: DatabaseReference?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myCollectionView.delegate = self
@@ -246,11 +253,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   
   // Search Bar Fuctions
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        performSegue(withIdentifier: "SearchProductViewController", sender: nil)
+        performSegue(withIdentifier: "SearchProductViewController", sender: self)
         mySearchBar.resignFirstResponder()
     }
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-       performSegue(withIdentifier: "SearchProductViewController", sender: nil)
+       performSegue(withIdentifier: "SearchProductViewController", sender: self)
         mySearchBar.resignFirstResponder()
         return true
     }
@@ -507,6 +514,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeTotalPrice.text = "\(Trolley.shared.price)"
     }
     func setItemValues()  {
+        ref = Database.database().reference()
+        handel = ref?.child("ItemInfo").observe(.childAdded, with: {(snapshoot) in
+            if let item = snapshoot.value as? AnyClass {
+            
+            
+            }
+            
+        })
         fruitInfo = Trolley.shared.fruitItem
         vegetableInfo = Trolley.shared.vegetableItem
         allItemInfo = Trolley.shared.allItemInfo
