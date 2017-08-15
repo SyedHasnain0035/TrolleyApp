@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33A25FEA1F3E243F00AE104A /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33A25FE91F3E243F00AE104A /* AlertView.xib */; };
+		33A25FEC1F3E247C00AE104A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A25FEB1F3E247C00AE104A /* AlertView.swift */; };
 		4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4126C0EC1F3A111400D761B3 /* Main.storyboard */; };
 		41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41443B981F3CAC8000F22111 /* GoogleService-Info.plist */; };
 		415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */; };
@@ -26,11 +28,12 @@
 		41E21FA41F31F96100DFA04A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E21FA31F31F96000DFA04A /* HistoryViewController.swift */; };
 		41E21FA61F31F97000DFA04A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E21FA51F31F97000DFA04A /* AccountViewController.swift */; };
 		41F407DF1F3B228400F319EA /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F407DE1F3B228400F319EA /* ProductViewController.swift */; };
-		41F407E11F3B3F0E00F319EA /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F407E01F3B3F0E00F319EA /* AlertViewController.swift */; };
 		51E6B098074F0959E784A495 /* Pods_TolleyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CF0C7559A2AF9CA111055D /* Pods_TolleyApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33A25FE91F3E243F00AE104A /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		33A25FEB1F3E247C00AE104A /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		4126C0EC1F3A111400D761B3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.release.xcconfig"; sourceTree = "<group>"; };
 		41443B981F3CAC8000F22111 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -53,7 +56,6 @@
 		41E21FA31F31F96000DFA04A /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		41E21FA51F31F97000DFA04A /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		41F407DE1F3B228400F319EA /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
-		41F407E01F3B3F0E00F319EA /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		8793316C5C0A51DDF53D232F /* Pods-TolleyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A1CF0C7559A2AF9CA111055D /* Pods_TolleyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TolleyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -183,7 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				41F407DE1F3B228400F319EA /* ProductViewController.swift */,
-				41F407E01F3B3F0E00F319EA /* AlertViewController.swift */,
+				33A25FE91F3E243F00AE104A /* AlertView.xib */,
+				33A25FEB1F3E247C00AE104A /* AlertView.swift */,
 			);
 			name = AlertVC;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33A25FEA1F3E243F00AE104A /* AlertView.xib in Resources */,
 				41E21F911F31E57300DFA04A /* LaunchScreen.storyboard in Resources */,
 				4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */,
 				41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */,
@@ -344,7 +348,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41F407DF1F3B228400F319EA /* ProductViewController.swift in Sources */,
-				41F407E11F3B3F0E00F319EA /* AlertViewController.swift in Sources */,
 				41E21FA21F31F95100DFA04A /* CheckOutViewController.swift in Sources */,
 				41E21F9D1F31F90700DFA04A /* SearchViewController.swift in Sources */,
 				416B77691F332BB9008D28B2 /* SearchItemTableViewCell.swift in Sources */,
@@ -353,6 +356,7 @@
 				416B775F1F330F16008D28B2 /* AllItemsCollectionViewCell.swift in Sources */,
 				41E21FA61F31F97000DFA04A /* AccountViewController.swift in Sources */,
 				41E21F851F31E57300DFA04A /* AppDelegate.swift in Sources */,
+				33A25FEC1F3E247C00AE104A /* AlertView.swift in Sources */,
 				41E21FA41F31F96100DFA04A /* HistoryViewController.swift in Sources */,
 				41822AC61F34749D0030C1FA /* Trolley.swift in Sources */,
 				41E21F9A1F31F7DF00DFA04A /* HomeViewController.swift in Sources */,
