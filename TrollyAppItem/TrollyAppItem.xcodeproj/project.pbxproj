@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4126E8051F4410E1006BBAD6 /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4126E8041F4410E1006BBAD6 /* ItemInfo.swift */; };
+		4126E8081F44735C006BBAD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4126E8071F44735C006BBAD6 /* LoginViewController.swift */; };
+		41D4EC581F449BAC00146188 /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D4EC571F449BAC00146188 /* ItemDetail.swift */; };
 		41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CF81F43369B0071F982 /* AppDelegate.swift */; };
 		41DA4CFB1F43369B0071F982 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CFA1F43369B0071F982 /* ViewController.swift */; };
 		41DA4CFE1F43369B0071F982 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41DA4CFC1F43369B0071F982 /* Main.storyboard */; };
@@ -20,6 +23,9 @@
 
 /* Begin PBXFileReference section */
 		3B563EF250B360A2F0BD3591 /* Pods-TrollyAppItem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrollyAppItem.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem.release.xcconfig"; sourceTree = "<group>"; };
+		4126E8041F4410E1006BBAD6 /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
+		4126E8071F44735C006BBAD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		41D4EC571F449BAC00146188 /* ItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
 		41DA4CF51F43369B0071F982 /* TrollyAppItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrollyAppItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DA4CF81F43369B0071F982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41DA4CFA1F43369B0071F982 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +61,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4126E8061F447332006BBAD6 /* Login SingUp */ = {
+			isa = PBXGroup;
+			children = (
+				4126E8071F44735C006BBAD6 /* LoginViewController.swift */,
+			);
+			name = "Login SingUp";
+			sourceTree = "<group>";
+		};
 		41DA4CEC1F43369B0071F982 = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +90,11 @@
 		41DA4CF71F43369B0071F982 /* TrollyAppItem */ = {
 			isa = PBXGroup;
 			children = (
+				4126E8061F447332006BBAD6 /* Login SingUp */,
 				41DA4D0C1F434EBC0071F982 /* TableViewCell */,
 				41DA4CF81F43369B0071F982 /* AppDelegate.swift */,
+				4126E8041F4410E1006BBAD6 /* ItemInfo.swift */,
+				41D4EC571F449BAC00146188 /* ItemDetail.swift */,
 				41DA4CFA1F43369B0071F982 /* ViewController.swift */,
 				41DA4D0F1F4353720071F982 /* ItemDetailViewController.swift */,
 				41DA4CFC1F43369B0071F982 /* Main.storyboard */,
@@ -239,10 +256,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D4EC581F449BAC00146188 /* ItemDetail.swift in Sources */,
+				4126E8081F44735C006BBAD6 /* LoginViewController.swift in Sources */,
 				41DA4CFB1F43369B0071F982 /* ViewController.swift in Sources */,
 				41DA4D0E1F434EF30071F982 /* ItemTableViewCell.swift in Sources */,
 				41DA4D101F4353720071F982 /* ItemDetailViewController.swift in Sources */,
 				41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */,
+				4126E8051F4410E1006BBAD6 /* ItemInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
