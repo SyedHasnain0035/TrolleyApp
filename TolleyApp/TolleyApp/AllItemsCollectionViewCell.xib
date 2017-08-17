@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPG-XR-dEl">
                         <rect key="frame" x="0.0" y="0.0" width="170" height="130"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fruit" translatesAutoresizingMaskIntoConstraints="NO" id="9Lm-iW-rlt">
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fruit" translatesAutoresizingMaskIntoConstraints="NO" id="9Lm-iW-rlt">
                                 <rect key="frame" x="0.0" y="-3" width="170" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>

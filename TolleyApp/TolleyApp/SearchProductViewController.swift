@@ -59,9 +59,11 @@ class SearchProductViewController: UIViewController, UITableViewDelegate, UITabl
             item = Trolley.shared.allItemInfo[indexPath.row]
         }
         cell.detailLabel.text = item.itemDetail
-        cell.itemImage.image = item.itemImage
+        cell.itemImage.image = #imageLiteral(resourceName: "loading")//item.itemImage
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: item.itemImage))
         cell.priceLabel.text = "\(item.itemPrice!) AED"
-        cell.weightLabel.text = item.itemQuantity
+        cell.weightLabel.text = item.itemWeight
         cell.countLabel.text = "\(item.itemCount!)"
         cell.watchForClickHandler(completion: {index in
             if index == 0 {

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 class CheckOutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var totalPriceMenuBar: UILabel!
@@ -19,6 +21,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         totalPriceLabel.text = "Total: \(Trolley.shared.price) AED"
         totalPriceMenuBar.text = "\(Trolley.shared.price)"
+        checkIfUserIsLogedIn()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,12 +32,32 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         myTabelView.reloadData()
          self.totalPriceLabel.text = "Total: \(Trolley.shared.price) AED"
         totalPriceMenuBar.text = "\(Trolley.shared.price)"
+        checkIfUserIsLogedIn()
     }
     override func viewWillDisappear(_ animated: Bool) {
         myTabelView.reloadData()
     }
+    // check out loged in user 
+    func checkIfUserIsLogedIn()  {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handelLogout), with: nil, afterDelay: 0)
+        } else {
+            let uId = Auth.auth().currentUser?.uid
+            Database.database().reference().child("User").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
+            }, withCancel: nil)
+        }
+    }
+    func handelLogout()  {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        let logout = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+        self.navigationController?.pushViewController(logout, animated: true)
+    }
     @IBAction func didTapBackButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func tollyButtonPressed(_ sender: UIButton) {
     }
@@ -53,14 +76,16 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         cell.backGroundView.layer.borderWidth = 1
         cell.backGroundView.layer.borderColor = UIColor.gray.cgColor
         cell.detailLabel.text = Trolley.shared.items[indexPath.row].itemDetail
-        cell.itemImage.image = Trolley.shared.items[indexPath.row].itemImage
+        cell.itemImage.image = #imageLiteral(resourceName: "loading")//Trolley.shared.items[indexPath.row].itemImage
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: Trolley.shared.items[indexPath.row].itemImage))
         cell.priceLabel.text = "\(Trolley.shared.items[indexPath.row].itemPrice!) AED"
-        cell.weightLabel.text = Trolley.shared.items[indexPath.row].itemQuantity
+        cell.weightLabel.text = Trolley.shared.items[indexPath.row].itemWeight
         cell.countLabel.text = "\(Trolley.shared.items[indexPath.row].itemCount!)"
         cell.watchForClickHandler(completion: { index in
             if index == 0 {
              Trolley.shared.items[indexPath.row].itemCount = Trolley.shared.items[indexPath.row].itemCount  + 1
-                Trolley.shared.price = Trolley.shared.price + Trolley.shared.items[indexPath.row].itemPrice
+                Trolley.shared.price = Trolley.shared.price + Trolley.shared.items[indexPath.row].itemPrice.toDouble()!
                cell.countLabel.text = "\(Trolley.shared.items[indexPath.row].itemCount!)"
                 self.totalPriceLabel.text = "Total: \(Trolley.shared.price) AED"
                 self.totalPriceMenuBar.text = "\(Trolley.shared.price)"
@@ -69,7 +94,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
                 if Trolley.shared.items[indexPath.row].itemCount < 1 {
                     Trolley.shared.items[indexPath.row].itemCount = 0
                     cell.countLabel.text = "\(Trolley.shared.items[indexPath.row].itemCount!)"
-                    Trolley.shared.price = Trolley.shared.price - Trolley.shared.items[indexPath.row].itemPrice
+                    Trolley.shared.price = Trolley.shared.price - Trolley.shared.items[indexPath.row].itemPrice.toDouble()!
                      self.totalPriceLabel.text = "Total: \(Trolley.shared.price) AED"
                     self.totalPriceMenuBar.text = "\(Trolley.shared.price)"
                     Trolley.shared.items.remove(at: indexPath.row)
@@ -77,7 +102,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
                 } else {
                     cell.countLabel.text = "\(Trolley.shared.items[indexPath.row].itemCount!)"
                     cell.countLabel.text = "\(Trolley.shared.items[indexPath.row].itemCount!)"
-                    Trolley.shared.price = Trolley.shared.price - Trolley.shared.items[indexPath.row].itemPrice
+                    Trolley.shared.price = Trolley.shared.price - Trolley.shared.items[indexPath.row].itemPrice.toDouble()!
                     self.totalPriceLabel.text = "Total: \(Trolley.shared.price) AED"
                     self.totalPriceMenuBar.text = "\(Trolley.shared.price)"
                 }

@@ -23,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		3B563EF250B360A2F0BD3591 /* Pods-TrollyAppItem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrollyAppItem.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem.release.xcconfig"; sourceTree = "<group>"; };
+		4114B3271F45C224009DAA47 /* TrollyAppItem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrollyAppItem-Bridging-Header.h"; sourceTree = "<group>"; };
 		4126E8041F4410E1006BBAD6 /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
 		4126E8071F44735C006BBAD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		41D4EC571F449BAC00146188 /* ItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 				41DA4D011F43369B0071F982 /* LaunchScreen.storyboard */,
 				41DA4D041F43369B0071F982 /* Info.plist */,
 				41DA4D0A1F4341BE0071F982 /* GoogleService-Info.plist */,
+				4114B3271F45C224009DAA47 /* TrollyAppItem-Bridging-Header.h */,
 			);
 			path = TrollyAppItem;
 			sourceTree = "<group>";
@@ -157,6 +159,7 @@
 				TargetAttributes = {
 					41DA4CF41F43369B0071F982 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -218,12 +221,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,10 +391,13 @@
 			baseConfigurationReference = 66B8B904557057461DCAE3D1 /* Pods-TrollyAppItem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TrollyAppItem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devclan.TrollyAppItem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TrollyAppItem/TrollyAppItem-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -399,10 +407,12 @@
 			baseConfigurationReference = 3B563EF250B360A2F0BD3591 /* Pods-TrollyAppItem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TrollyAppItem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devclan.TrollyAppItem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TrollyAppItem/TrollyAppItem-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

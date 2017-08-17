@@ -10,6 +10,7 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var itemActiveImage: UIImageView!
     @IBOutlet weak var itemType: UILabel!
     @IBOutlet weak var itemWeight: UILabel!

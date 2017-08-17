@@ -16,7 +16,8 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.passwordTextField.text = "123456"
+        self.emailTextField.text = "ali@test.com"
         ref = Database.database().reference()
     }
 
@@ -45,7 +46,9 @@ class AccountViewController: UIViewController {
                 
                 if error == nil {
                     print("You have successfully logged in")
-                    self.performSegue(withIdentifier: "backToCheckOutView", sender: self)
+                    self.fetchItems()
+                    let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                    self.navigationController?.pushViewController(secondViewController, animated: true)
                 } else {
                     
                     //Tells the user that there is an error and then gets firebase to tell them the error
@@ -60,12 +63,31 @@ class AccountViewController: UIViewController {
         }
         
     }
-
     @IBAction func didTapSingUpButton(_ sender: UIButton) {
     }
     @IBAction func didTapBackButton(_ sender: UIButton) {
     self.dismiss(animated: true, completion: nil)
     }
+    func fetchItems()  {
+        Database.database().reference().child("ItemInfo").observe(.childAdded, with: { (snapShot) in
+            if  let dic = snapShot.value as? [String: Any] {
+                let uId = Auth.auth().currentUser?.uid
+                let count = 0
+                let itemSave = ItemInfo(itemId: uId!,itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, itemActive: dic["Active"] as! Int, itemCount: count )
+                if itemSave.itemActive == 1 {
+                    if  itemSave.itemType == "Fruit" {
+                        Trolley.shared.fruitItem.append(itemSave)
+                    } else {
+                        Trolley.shared.vegetableItem.append(itemSave)
+                    }
+                    Trolley.shared.allItemInfo.append(itemSave)
+                }
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

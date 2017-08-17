@@ -24,6 +24,10 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         fetchItems()
     
     }
+    override func viewWillAppear(_ animated: Bool) {
+        myTableView.reloadData()
+        checkIfUserIsLogedIn()
+    }
     func checkIfUserIsLogedIn()  {
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handelLogout), with: nil, afterDelay: 0)
@@ -41,7 +45,8 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     func fetchItems()  {
         Database.database().reference().child("ItemInfo").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
-                let itemDetail1 = ItemInfo(itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
+                let uId = Auth.auth().currentUser?.uid
+                let itemDetail1 = ItemInfo(id: uId!, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
                 self.items.append(itemDetail1)
                 self.myTableView.reloadData()
                 print("_______________")
@@ -55,8 +60,8 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         } catch let logoutError {
             print(logoutError)
         }
-        let logIn = LoginViewController()
-        present(logIn, animated: true, completion: nil)
+      //  let logIn = LoginViewController()
+        performSegue(withIdentifier: "sugueLogout", sender: self)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,10 +79,12 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         }
         
         // Fetches the appropriate meal for the data source layout.
-        
+        cell.backGroundView.layer.cornerRadius = 12
         cell.itemDetailLabel.text = "Detail:" + items[indexPath.row].itemDetail
         cell.itemPrice.text = "Price: " + items[indexPath.row].itemPrice
-        cell.itemImage.image = #imageLiteral(resourceName: "lunch")
+        cell.itemImage.image = #imageLiteral(resourceName: "loading")
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: items[indexPath.row].itemImage))
         cell.itemWeight.text = "Weight: " + items[indexPath.row].itemWeight
         cell.itemType.text = "Type: " +  items[indexPath.row].itemType
         if  items[indexPath.row].active == 1 {
@@ -92,7 +99,9 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 170
+    }
     
     // Override to support editing the table view.
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

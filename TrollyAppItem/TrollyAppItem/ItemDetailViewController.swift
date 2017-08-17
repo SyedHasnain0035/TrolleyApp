@@ -12,21 +12,23 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
-class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate ,  UIPickerViewDataSource, UIPickerViewDelegate{
 
+    @IBOutlet weak var itemTypePicker: UIPickerView!
     @IBOutlet weak var checkActiveImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var isActiveButton: UIButton!
     @IBOutlet weak var itemTypTextField: UITextField!
     @IBOutlet weak var itemWeightTextField: UITextField!
-    
     @IBOutlet weak var itemPriceTextField: UITextField!
     @IBOutlet weak var itemImage: UIImageView!
     
     @IBOutlet weak var itemDetailTextField: UITextField!
     var selcted = false
+    var selectedActive = 0
     var item: ItemInfo?
     var refrence: DatabaseReference?
+    var typesList = ["Fruit", "Vegetable"]
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegate()
@@ -36,24 +38,38 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             self.itemTypTextField.text = item?.itemType ?? ""
             self.itemPriceTextField.text = item?.itemPrice ?? ""
             self.itemWeightTextField.text = item?.itemWeight ?? ""
-            self.itemImage.image = #imageLiteral(resourceName: "lunch")
-            if (item?.active == 1) {
+            self.itemImage.image = #imageLiteral(resourceName: "loading")
+        if item != nil {
+            self.selectedActive = (item?.active)!
+            let imageView = self.itemImage.viewWithTag(1) as! UIImageView
+            imageView.sd_setImage(with: URL(string: (item?.itemImage)!))
+        }
+                   if (item?.active == 1) {
                 self.checkActiveImage.image = #imageLiteral(resourceName: "checked")
             } else {
                 self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
                 
             }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        updateSaveButtonState()
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         updateSaveButtonState()
+        if (textField == self.itemTypTextField){
+            self.itemTypePicker.isHidden = false
+        } else {
+            self.itemTypePicker.isHidden = true
+        }
+        return true
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         updateSaveButtonState()
+
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -84,11 +100,11 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     @IBAction func didTapActiveButton(_ sender: UIButton) {
         if self.selcted == false {
-            item?.isActive = NSNumber(value: 1) as Bool
+            selectedActive = 1
             self.selcted = true
             self.checkActiveImage.image = #imageLiteral(resourceName: "checked")
         } else {
-            item?.isActive = NSNumber(value: 0) as Bool
+           selectedActive = 0
             self.selcted = false
             self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
         }
@@ -129,7 +145,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         let price = itemPriceTextField.text!
         let weight = itemWeightTextField.text!
         let type = itemTypTextField.text!
-        let active = item?.active ?? 0
+        let active = selectedActive
         let imageName = NSUUID().uuidString
         let storeRef = Storage.storage().reference().child("Item Images").child("\(imageName).png")
         
@@ -145,6 +161,40 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             })
         }
     }
+    
+    ////////////////////////////////////////////////////
+    ///// Picker Type ///////////
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var countrows : Int = typesList.count
+        if pickerView == itemTypePicker {
+            
+            countrows = self.typesList.count
+        }
+        
+        return countrows
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == itemTypePicker {
+            
+            let titleRow = typesList[row]
+            
+            return titleRow
+            
+        }
+        return ""
+    }
+    // Picker View delegate
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == itemTypePicker {
+            self.itemTypTextField.text = self.typesList[row]
+            self.itemTypePicker.isHidden = true
+        }
+    }
+    
     //MARK: Private Methods
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
@@ -155,7 +205,9 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         }
     }
     func setDelegate() {
-       
+        itemTypePicker.delegate = self
+        itemTypePicker.dataSource = self
+        self.itemTypePicker.isHidden = true
         itemTypTextField.delegate = self
         itemPriceTextField.delegate = self
         itemWeightTextField.delegate = self

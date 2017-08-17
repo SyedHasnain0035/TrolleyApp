@@ -11,18 +11,20 @@ import UIKit
 class ItemInfo {
     var itemId: String!
     var itemDetail: String!
-    var itemPrice: Double!
-    var itemQuantity: String!
-    var itemImage: UIImage!
+    var itemPrice: String!
+    var itemWeight: String!
+    var itemImage: String!
     var itemType: String!
+    var itemActive: Int!
     var itemCount: Int!
-    init(itemId: String, itemDetail: String, itemPrice: Double, itemQuantity: String,itemType: String, itemImage: UIImage, itemCount: Int) {
+    init(itemId: String, itemDetail: String, itemPrice: String, itemWeight: String,itemType: String, itemImage: String, itemActive: Int, itemCount: Int) {
         self.itemId = itemId
         self.itemDetail = itemDetail
         self.itemPrice = itemPrice
-        self.itemQuantity = itemQuantity
+        self.itemWeight = itemWeight
         self.itemType = itemType
         self.itemImage = itemImage
+        self.itemActive = itemActive
         self.itemCount = itemCount
     }
 }

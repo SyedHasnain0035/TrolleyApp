@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , UISearchBarDelegate{
 
     @IBOutlet weak var pageTitleLabel: UILabel!
@@ -19,17 +21,39 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     let searcController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkIfUserIsLogedIn()
         myTabelView.delegate = self
         myTabelView.dataSource = self
         allItemInfo =   Trolley.shared.allItemInfo
-            self.basicTableViewHeaderSetting()
+        self.basicTableViewHeaderSetting()
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     override func viewWillAppear(_ animated: Bool) {
+        checkIfUserIsLogedIn()
         self.totalPriceLabel.text = "\(Trolley.shared.price)"
         myTabelView.reloadData()
+        
+    }
+    func checkIfUserIsLogedIn()  {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handelLogout), with: nil, afterDelay: 0)
+        } else {
+            let uId = Auth.auth().currentUser?.uid
+            Database.database().reference().child("User").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
+            }, withCancel: nil)
+        }
+    }
+    func handelLogout()  {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        let logout = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+        self.navigationController?.pushViewController(logout, animated: true)
     }
     @IBAction func didTapMenuButton(_ sender: UIButton) {
     }
@@ -69,9 +93,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             all = allItemInfo[indexPath.row]
         }
         cell.detailLabel.text = all.itemDetail
-        cell.itemImage.image = all.itemImage
+        cell.itemImage.image = #imageLiteral(resourceName: "loading")//all.itemImage
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: all.itemImage))
         cell.priceLabel.text = "\(all.itemPrice!) AED"
-        cell.weightLabel.text = all.itemQuantity
+        cell.weightLabel.text = all.itemWeight
         cell.countLabel.text = "\(all.itemCount!)"
         cell.watchForClickHandler(completion: {index in
             if index == 0 {

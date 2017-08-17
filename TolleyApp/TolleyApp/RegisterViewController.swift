@@ -136,7 +136,7 @@ class RegisterViewController: UIViewController,  UIPickerViewDataSource, UIPicke
                         
                         self.ref?.child("User").child(userID).setValue(["Title": userTitle, "FirstName": userFirstName, "LastName":userLastName, "CountryCode": userCountryCode, "MobileCode": userMobileCode, "MobileNumber": userPhoneNumber, "Email": userEmail, "Password": userPassword, "Birthdate": userBirthDay, "Gender": userGender, "Nationality": userNationality, "Religion": userReligon, "Area": userAreaAddress, "Apparment": userApparment, "BuildingNo": userBuildingAddress, "SpecialInstruction": userSpecialInstruction])
                         
-                        self.performSegue(withIdentifier: "backToCheckOutView1", sender: self)
+                        self.performSegue(withIdentifier: "goToHomeViewFromSingUp", sender: self)
                         
                         
                     } else {
