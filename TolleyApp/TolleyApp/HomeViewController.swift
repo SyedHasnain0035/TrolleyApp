@@ -49,6 +49,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         myCollectionView.dataSource = self
         ref = Database.database().reference()
         checkIfUserIsLogedIn()
+        myCollectionView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -81,6 +82,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.allItemInfo = Trolley.shared.allItemInfo
         self.fruitInfo = Trolley.shared.fruitItem
         self.vegetableInfo = Trolley.shared.vegetableItem
+        myCollectionView.reloadData()
     }
     func handelLogout()  {
         do {

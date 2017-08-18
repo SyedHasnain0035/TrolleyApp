@@ -27,13 +27,13 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     var selcted = false
     var selectedActive = 0
     var item: ItemInfo?
-    var refrence: DatabaseReference?
+    var refrenceItemStore: DatabaseReference?
     var typesList = ["Fruit", "Vegetable"]
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegate()
         updateSaveButtonState()
-        refrence = Database.database().reference()
+        refrenceItemStore = Database.database().reference().child("ItemDetail")
             self.itemDetailTextField.text = item?.itemDetail ?? ""
             self.itemTypTextField.text = item?.itemType ?? ""
             self.itemPriceTextField.text = item?.itemPrice ?? ""
@@ -156,7 +156,10 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
                     return
                 }
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                 self.refrence?.child("ItemInfo").childByAutoId().setValue(["Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ])
+                   // Item Save in data base 
+                    let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
+                    let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
+                 self.refrenceItemStore?.child(keyId).setValue(itemStore)
                 }
             })
         }

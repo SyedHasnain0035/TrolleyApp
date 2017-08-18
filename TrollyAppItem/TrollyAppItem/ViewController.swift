@@ -43,10 +43,9 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         }
     }
     func fetchItems()  {
-        Database.database().reference().child("ItemInfo").observe(.childAdded, with: { (snapShot) in
+        Database.database().reference().child("ItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
-                let uId = Auth.auth().currentUser?.uid
-                let itemDetail1 = ItemInfo(id: uId!, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
+                let itemDetail1 = ItemInfo(id: dic["ItemId"] as! String, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
                 self.items.append(itemDetail1)
                 self.myTableView.reloadData()
                 print("_______________")

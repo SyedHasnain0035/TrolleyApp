@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabase
 class AccountViewController: UIViewController {
-   var ref: DatabaseReference?
+    var ref: DatabaseReference?
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class AccountViewController: UIViewController {
         self.emailTextField.text = "ali@test.com"
         ref = Database.database().reference()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,9 +46,7 @@ class AccountViewController: UIViewController {
                 
                 if error == nil {
                     print("You have successfully logged in")
-                    self.fetchItems()
-                    let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                    self.navigationController?.pushViewController(secondViewController, animated: true)
+                    self.findNumberOfItemInDataBase()
                 } else {
                     
                     //Tells the user that there is an error and then gets firebase to tell them the error
@@ -66,14 +64,25 @@ class AccountViewController: UIViewController {
     @IBAction func didTapSingUpButton(_ sender: UIButton) {
     }
     @IBAction func didTapBackButton(_ sender: UIButton) {
-    self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
-    func fetchItems()  {
-        Database.database().reference().child("ItemInfo").observe(.childAdded, with: { (snapShot) in
+    func findNumberOfItemInDataBase() {
+        
+        Database.database().reference().child("ItemDetail").observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { (datta, ggg) in
+            let numberOfItem = datta.childrenCount
+            self.fetchItems(number: Int(numberOfItem))
+            
+        }, withCancel: nil)
+        
+    }
+    var numberCount = 0
+    func fetchItems(number: Int)  {
+       
+        Database.database().reference().child("ItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
-                let uId = Auth.auth().currentUser?.uid
+                self.numberCount = self.numberCount + 1
                 let count = 0
-                let itemSave = ItemInfo(itemId: uId!,itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, itemActive: dic["Active"] as! Int, itemCount: count )
+                let itemSave = ItemInfo(itemId: dic["ItemId"] as! String,itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, itemActive: dic["Active"] as! Int, itemCount: count )
                 if itemSave.itemActive == 1 {
                     if  itemSave.itemType == "Fruit" {
                         Trolley.shared.fruitItem.append(itemSave)
@@ -81,21 +90,16 @@ class AccountViewController: UIViewController {
                         Trolley.shared.vegetableItem.append(itemSave)
                     }
                     Trolley.shared.allItemInfo.append(itemSave)
+                    
+                }
+                if  self.numberCount == number {
+                    self.goToNextVC()
                 }
             }
-            
         }, withCancel: nil)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func goToNextVC() {
+        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.navigationController?.pushViewController(secondViewController, animated: true)
     }
-    */
-
 }
