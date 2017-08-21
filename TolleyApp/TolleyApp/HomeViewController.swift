@@ -107,8 +107,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 popUpHideView.alpha = 0
                 popUpHideView2.alpha = 0
             } else {
-                popUpHideView.alpha = 0.9
-                popUpHideView2.alpha = 0.7
+                popUpHideView.alpha = 1
+                popUpHideView2.alpha = 1
                 popUpViewCountLabel.text = "\(fruitInfo[indexPath.row].itemCount!)"
             }
             popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[indexPath.row].itemImage
@@ -122,8 +122,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 popUpHideView.alpha = 0
                 popUpHideView2.alpha = 0
             } else {
-                popUpHideView.alpha = 0.9
-                popUpHideView2.alpha = 0.7
+                popUpHideView.alpha = 1
+                popUpHideView2.alpha = 1
                 popUpViewCountLabel.text = "\(vegetableInfo[indexPath.row].itemCount!)"
             }
             let imageView = self.popUpViewImage.viewWithTag(0) as! UIImageView
@@ -136,8 +136,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 popUpHideView.alpha = 0
                 popUpHideView2.alpha = 0
             } else {
-                popUpHideView.alpha = 0.9
-                popUpHideView2.alpha = 0.7
+                popUpHideView.alpha = 1
+                popUpHideView2.alpha = 1
                 popUpViewCountLabel.text = "\(allItemInfo[indexPath.row].itemCount!)"
             }
             popUpViewImage.image = #imageLiteral(resourceName: "loading")
@@ -177,12 +177,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             if fruitInfo[indexPath.row].itemCount == 0 {
                 cell.hideView.alpha = 0
             } else {
-                cell.hideView.alpha = 0.7
+                cell.hideView.alpha = 1
                 cell.allCountLabel.text = "\( self.fruitInfo[indexPath.row].itemCount!)"
             }
             cell.watchForClickHandler(completion: {index in
                 if index == 0 {
-                    cell.hideView.alpha = 0.7
+                    cell.hideView.alpha = 1
                     Trolley.shared.addItemToTrolley(item: self.fruitInfo[indexPath.row])
                     cell.allCountLabel.text = "\( self.fruitInfo[indexPath.row].itemCount!)"
                 }else {
@@ -222,12 +222,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             if vegetableInfo[indexPath.row].itemCount == 0 {
                 cell.hideView.alpha = 0
             } else {
-                cell.hideView.alpha = 0.7
+                cell.hideView.alpha = 1
                 cell.allCountLabel.text = "\( self.vegetableInfo[indexPath.row].itemCount!)"
             }
             cell.watchForClickHandler(completion: {index in
                 if index == 0 {
-                    cell.hideView.alpha = 0.7
+                    cell.hideView.alpha = 1
                     Trolley.shared.addItemToTrolley(item: self.vegetableInfo[indexPath.row])
                     cell.allCountLabel.text = "\( self.vegetableInfo[indexPath.row].itemCount!)"
                 }else {
@@ -266,13 +266,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             if allItemInfo[indexPath.row].itemCount == 0 {
                 cell.hideView.alpha = 0
             } else {
-                cell.hideView.alpha = 0.7
+                cell.hideView.alpha = 1
                 cell.allCountLabel.text = "\( self.allItemInfo[indexPath.row].itemCount!)"
             }
             cell.watchForClickHandler(completion: {index in
                 if index == 0 {
                     Trolley.shared.addItemToTrolley(item: self.allItemInfo[indexPath.row])
-                    cell.hideView.alpha = 0.7
+                    cell.hideView.alpha = 1
                     cell.allCountLabel.text = "\(self.allItemInfo[indexPath.row].itemCount!)"
                 }else {
                     Trolley.shared.removeItemToTrolley(trolleyItem: self.allItemInfo[indexPath.row])
@@ -313,8 +313,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//
@@ -329,8 +329,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
@@ -347,8 +347,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -361,8 +361,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -380,8 +380,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -397,8 +397,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -419,8 +419,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
@@ -435,8 +435,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(fruitInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//fruitInfo[popUpCount].itemImage
@@ -453,8 +453,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//vegetableInfo[popUpCount].itemImage
@@ -469,8 +469,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(vegetableInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//
@@ -488,8 +488,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -505,8 +505,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                     popUpHideView.alpha = 0
                     popUpHideView2.alpha = 0
                 } else {
-                    popUpHideView.alpha = 0.9
-                    popUpHideView2.alpha = 0.7
+                    popUpHideView.alpha = 1
+                    popUpHideView2.alpha = 1
                     popUpViewCountLabel.text = "\(allItemInfo[popUpCount].itemCount!)"
                 }
                 popUpViewImage.image = #imageLiteral(resourceName: "loading")//allItemInfo[popUpCount].itemImage
@@ -520,8 +520,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     @IBAction func didTapPopUpViewAddButton(_ sender: Any) {
-        self.popUpHideView.alpha = 0.9
-        self.popUpHideView2.alpha = 0.5
+        self.popUpHideView.alpha = 1
+        self.popUpHideView2.alpha = 1
         if isFruit == true {
             popUpItemDisplay(itemType: fruitInfo)
         } else if isVegetable == true {

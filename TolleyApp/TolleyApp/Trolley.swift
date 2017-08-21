@@ -59,7 +59,11 @@ class Trolley: NSObject {
             }
         }
     }
- 
+    func deleteAll () {
+        allItemInfo = []
+        fruitItem = []
+        vegetableItem = []
+    }
    }
 extension String {
     func toDouble() -> Double? {

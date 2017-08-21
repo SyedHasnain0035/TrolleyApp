@@ -13,7 +13,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate ,  UIPickerViewDataSource, UIPickerViewDelegate{
-
+    
     @IBOutlet weak var itemTypePicker: UIPickerView!
     @IBOutlet weak var checkActiveImage: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -34,22 +34,22 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         setDelegate()
         updateSaveButtonState()
         refrenceItemStore = Database.database().reference().child("ItemDetail")
-            self.itemDetailTextField.text = item?.itemDetail ?? ""
-            self.itemTypTextField.text = item?.itemType ?? ""
-            self.itemPriceTextField.text = item?.itemPrice ?? ""
-            self.itemWeightTextField.text = item?.itemWeight ?? ""
-            self.itemImage.image = #imageLiteral(resourceName: "loading")
+        self.itemDetailTextField.text = item?.itemDetail ?? ""
+        self.itemTypTextField.text = item?.itemType ?? ""
+        self.itemPriceTextField.text = item?.itemPrice ?? ""
+        self.itemWeightTextField.text = item?.itemWeight ?? ""
+        self.itemImage.image = #imageLiteral(resourceName: "loading")
         if item != nil {
             self.selectedActive = (item?.active)!
             let imageView = self.itemImage.viewWithTag(1) as! UIImageView
             imageView.sd_setImage(with: URL(string: (item?.itemImage)!))
         }
-                   if (item?.active == 1) {
-                self.checkActiveImage.image = #imageLiteral(resourceName: "checked")
-            } else {
-                self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
-                
-            }
+        if (item?.active == 1) {
+            self.checkActiveImage.image = #imageLiteral(resourceName: "checked")
+        } else {
+            self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
+            
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         updateSaveButtonState()
@@ -69,7 +69,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         updateSaveButtonState()
-
+        
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -82,7 +82,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         } else if let orignalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             selectedImageFromPicker = orignalImage
         }else {
-                fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         // Set photoImageView to display the selected image.
         if let selectedImage = selectedImageFromPicker {
@@ -92,7 +92,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         // Dissmis Picker
         dismiss(animated: true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,12 +104,12 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             self.selcted = true
             self.checkActiveImage.image = #imageLiteral(resourceName: "checked")
         } else {
-           selectedActive = 0
+            selectedActive = 0
             self.selcted = false
             self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
         }
     }
-
+    
     @IBAction func didTapCancelButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
@@ -122,7 +122,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         else {
             fatalError("The MealViewController is not inside a navigation controller.")
         }
-
+        
     }
     @IBAction func selectImageFromPhotoGallery(_ sender: UITapGestureRecognizer) {
         let imagePickerController = UIImagePickerController()
@@ -156,10 +156,10 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
                     return
                 }
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                   // Item Save in data base 
+                    // Item Save in data base
                     let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
                     let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
-                 self.refrenceItemStore?.child(keyId).setValue(itemStore)
+                    self.refrenceItemStore?.child(keyId).setValue(itemStore)
                 }
             })
         }
@@ -222,13 +222,13 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
             storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
-                  
+                    
                     return
                 }
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                     url =  profileImageUrl
+                    url =  profileImageUrl
                 }
-            
+                
             })
         }
         return url

@@ -88,6 +88,12 @@ class RegisterViewController: UIViewController,  UIPickerViewDataSource, UIPicke
             self.titlePicker.isHidden = true
         }
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if (textField == self.titleTextField){
+            self.titlePicker.isHidden = false
+        }
+        return true
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField == self.titleTextField){
             self.titlePicker.isHidden = false

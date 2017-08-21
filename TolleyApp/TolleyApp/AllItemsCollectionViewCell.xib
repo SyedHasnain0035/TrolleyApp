@@ -121,7 +121,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.60970791903409094" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
             </view>
