@@ -672,7 +672,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="538"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="153" id="8K1-EK-j8K" customClass="HistroyTableViewCell" customModule="TolleyApp" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="HistroyTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistroyTableViewCell" rowHeight="153" id="8K1-EK-j8K" customClass="HistroyTableViewCell" customModule="TolleyApp" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="153"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8K1-EK-j8K" id="0X4-es-dZk">

@@ -82,7 +82,8 @@ class HistoryViewController: UIViewController,  UITableViewDelegate, UITableView
         return orders.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = myTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "HistroyTableViewCell", for: indexPath) as! HistroyTableViewCell
+        cell.dateLabel.text = orders[indexPath.row].detail
         
                return cell
     }
