@@ -65,7 +65,10 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.pushViewController(logout, animated: true)
     }
     @IBAction func didTapBackButton(_ sender: UIButton) {
-        _ = navigationController?.popViewController(animated: true)
+        //_ = navigationController?.popViewController(animated: true)
+        let appBar = self.tabBarController as? AppTabbarControllerView
+        appBar?.selectedIndex = (appBar?.previousIndex)!
+        appBar?.previousIndex = nil
     }
     @IBAction func tollyButtonPressed(_ sender: UIButton) {
     }
@@ -184,7 +187,8 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
     func showSuccessAlert(service: String) {
         let alert = UIAlertController(title: "Success", message: " \(service)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Dismiss", style: .default) { (action) in
-            _ = self.navigationController?.popViewController(animated: true)
+            //_ = self.navigationController?.popViewController(animated: true)
+            self.tabBarController?.selectedIndex = 3
             for i in 0 ..< Trolley.shared.items.count {
                 Trolley.shared.items[i].itemCount = 0
             }

@@ -9,7 +9,7 @@
 import UIKit
 
 class AppTabbarControllerView: UITabBarController {
-
+    var previousIndex: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         if let items = self.tabBar.items

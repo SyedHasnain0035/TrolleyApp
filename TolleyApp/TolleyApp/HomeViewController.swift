@@ -570,8 +570,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         myCollectionView.reloadData()
     }
     @IBAction func didTapTrolleyButton(_ sender: UIButton) {
-        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        let apptabbarvc = self.tabBarController as? AppTabbarControllerView
+        apptabbarvc?.previousIndex = apptabbarvc?.selectedIndex
+        self.tabBarController?.selectedIndex = 4
+        
+       /* let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
+        self.navigationController?.pushViewController(secondViewController, animated: true)*/
     }
     @IBAction func sideMenuButtonClicked(_ sender: UIButton) {
         self.handelLogout()

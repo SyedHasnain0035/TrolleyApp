@@ -98,9 +98,9 @@ class AccountViewController: UIViewController {
         }, withCancel: nil)
     }
     func goToNextVC() {
+       self.tabBarController?.selectedIndex = 1
+    /*    let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
        
-        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-       
-        self.navigationController?.pushViewController(secondViewController, animated: true)
+        self.navigationController?.pushViewController(secondViewController, animated: true)*/
     }
 }
