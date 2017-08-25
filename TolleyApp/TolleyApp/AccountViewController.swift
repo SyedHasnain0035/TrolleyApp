@@ -16,8 +16,8 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.passwordTextField.text = "123456"
-        self.emailTextField.text = "ali@test.com"
+        self.passwordTextField.text = "654321"
+        self.emailTextField.text = "abbas@gmail.com"
         ref = Database.database().reference()
     }
     
@@ -25,7 +25,6 @@ class AccountViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     @IBAction func didTapCallButton(_ sender: UIButton) {
     }
     @IBAction func didTapEmailUsButton(_ sender: UIButton) {
@@ -99,7 +98,9 @@ class AccountViewController: UIViewController {
         }, withCancel: nil)
     }
     func goToNextVC() {
+       
         let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+       
         self.navigationController?.pushViewController(secondViewController, animated: true)
     }
 }

@@ -140,7 +140,7 @@ class RegisterViewController: UIViewController,  UIPickerViewDataSource, UIPicke
                         let userSpecialInstruction: String = self.specialInstructionTextFiled.text ?? "-"
                         let userBuildingAddress: String = self.buildingTextField.text ?? "-"
                         
-                        self.ref?.child("User").child(userID).setValue(["Title": userTitle, "FirstName": userFirstName, "LastName":userLastName, "CountryCode": userCountryCode, "MobileCode": userMobileCode, "MobileNumber": userPhoneNumber, "Email": userEmail, "Password": userPassword, "Birthdate": userBirthDay, "Gender": userGender, "Nationality": userNationality, "Religion": userReligon, "Area": userAreaAddress, "Apparment": userApparment, "BuildingNo": userBuildingAddress, "SpecialInstruction": userSpecialInstruction])
+                        self.ref?.child("User").child(userID).setValue(["UserId": userID ,"Title": userTitle, "FirstName": userFirstName, "LastName":userLastName, "CountryCode": userCountryCode, "MobileCode": userMobileCode, "MobileNumber": userPhoneNumber, "Email": userEmail, "Password": userPassword, "Birthdate": userBirthDay, "Gender": userGender, "Nationality": userNationality, "Religion": userReligon, "Area": userAreaAddress, "Apparment": userApparment, "BuildingNo": userBuildingAddress, "SpecialInstruction": userSpecialInstruction])
                         
                         self.performSegue(withIdentifier: "goToHomeViewFromSingUp", sender: self)
                         
@@ -161,5 +161,5 @@ class RegisterViewController: UIViewController,  UIPickerViewDataSource, UIPicke
     @IBAction func didTapBackButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-
+   
 }

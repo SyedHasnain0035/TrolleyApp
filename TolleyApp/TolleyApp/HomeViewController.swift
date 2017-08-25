@@ -87,6 +87,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func handelLogout()  {
         do {
             try Auth.auth().signOut()
+            Trolley.shared.deleteAll()
         } catch let logoutError {
             print(logoutError)
         }

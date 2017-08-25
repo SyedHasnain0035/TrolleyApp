@@ -28,7 +28,6 @@ class Trolley: NSObject {
             items.append(item)
             price = price + item.itemPrice.toDouble()!
              item.itemCount = item.itemCount + 1
-            
             return
         }
         var found = false
@@ -37,7 +36,6 @@ class Trolley: NSObject {
                 found = true
                 item.itemCount = item.itemCount + 1
                 price = price + item.itemPrice.toDouble()!
-                
             } else {
                found = false
             }
@@ -47,7 +45,6 @@ class Trolley: NSObject {
             items.append(item)
             price = price + item.itemPrice.toDouble()!
             item.itemCount = item.itemCount + 1
-            
         }
     }
     func removeItemToTrolley(trolleyItem: ItemInfo)  {
@@ -72,4 +69,3 @@ extension String {
         return numberFormatter.number(from: self)?.doubleValue
     }
 }
-

@@ -12,6 +12,8 @@
 		4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4126C0EC1F3A111400D761B3 /* Main.storyboard */; };
 		41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41443B981F3CAC8000F22111 /* GoogleService-Info.plist */; };
 		415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */; };
+		4167E52E1F4FF7A500A63988 /* AppTabbarControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167E52D1F4FF7A500A63988 /* AppTabbarControllerView.swift */; };
+		4167E5301F503FFD00A63988 /* HistroyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167E52F1F503FFD00A63988 /* HistroyTableViewCell.swift */; };
 		416B775F1F330F16008D28B2 /* AllItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B775D1F330F16008D28B2 /* AllItemsCollectionViewCell.swift */; };
 		416B77601F330F16008D28B2 /* AllItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416B775E1F330F16008D28B2 /* AllItemsCollectionViewCell.xib */; };
 		416B77631F3314CA008D28B2 /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B77621F3314CA008D28B2 /* ItemInfo.swift */; };
@@ -39,6 +41,8 @@
 		412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.release.xcconfig"; sourceTree = "<group>"; };
 		41443B981F3CAC8000F22111 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4167E52D1F4FF7A500A63988 /* AppTabbarControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabbarControllerView.swift; sourceTree = "<group>"; };
+		4167E52F1F503FFD00A63988 /* HistroyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistroyTableViewCell.swift; sourceTree = "<group>"; };
 		416B775D1F330F16008D28B2 /* AllItemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		416B775E1F330F16008D28B2 /* AllItemsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllItemsCollectionViewCell.xib; sourceTree = "<group>"; };
 		416B77621F3314CA008D28B2 /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
@@ -78,6 +82,14 @@
 			children = (
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		4167E52C1F4FF77700A63988 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				4167E52D1F4FF7A500A63988 /* AppTabbarControllerView.swift */,
+			);
+			name = TabBarController;
 			sourceTree = "<group>";
 		};
 		416B775C1F330EE1008D28B2 /* AllItemsCollectionViewCell */ = {
@@ -128,6 +140,7 @@
 		41E21F831F31E57300DFA04A /* TolleyApp */ = {
 			isa = PBXGroup;
 			children = (
+				4167E52C1F4FF77700A63988 /* TabBarController */,
 				4114B3261F45BE8B009DAA47 /* Models */,
 				41F407DD1F3B226600F319EA /* AlertVC */,
 				416B77661F332B8A008D28B2 /* SearchTableViewCell */,
@@ -179,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				41E21FA31F31F96000DFA04A /* HistoryViewController.swift */,
+				4167E52F1F503FFD00A63988 /* HistroyTableViewCell.swift */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -365,8 +379,10 @@
 				415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */,
 				416B77631F3314CA008D28B2 /* ItemInfo.swift in Sources */,
 				416B775F1F330F16008D28B2 /* AllItemsCollectionViewCell.swift in Sources */,
+				4167E52E1F4FF7A500A63988 /* AppTabbarControllerView.swift in Sources */,
 				41E21FA61F31F97000DFA04A /* AccountViewController.swift in Sources */,
 				41E21F851F31E57300DFA04A /* AppDelegate.swift in Sources */,
+				4167E5301F503FFD00A63988 /* HistroyTableViewCell.swift in Sources */,
 				33A25FEC1F3E247C00AE104A /* AlertView.swift in Sources */,
 				41E21FA41F31F96100DFA04A /* HistoryViewController.swift in Sources */,
 				41822AC61F34749D0030C1FA /* Trolley.swift in Sources */,
