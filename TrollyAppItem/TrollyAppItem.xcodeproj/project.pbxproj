@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4126E8051F4410E1006BBAD6 /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4126E8041F4410E1006BBAD6 /* ItemInfo.swift */; };
 		4126E8081F44735C006BBAD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4126E8071F44735C006BBAD6 /* LoginViewController.swift */; };
+		4132C3A61F54291E003910DD /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3A51F54291E003910DD /* OrderTableViewCell.swift */; };
+		4132C3A81F54293B003910DD /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3A71F54293A003910DD /* OrderListViewController.swift */; };
+		4132C3AA1F54480D003910DD /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3A91F54480D003910DD /* OrderDetailViewController.swift */; };
+		4132C3AC1F546468003910DD /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3AB1F546468003910DD /* Storyboard.swift */; };
 		41D4EC581F449BAC00146188 /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D4EC571F449BAC00146188 /* ItemDetail.swift */; };
 		41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CF81F43369B0071F982 /* AppDelegate.swift */; };
 		41DA4CFB1F43369B0071F982 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CFA1F43369B0071F982 /* ViewController.swift */; };
@@ -26,6 +30,10 @@
 		4114B3271F45C224009DAA47 /* TrollyAppItem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrollyAppItem-Bridging-Header.h"; sourceTree = "<group>"; };
 		4126E8041F4410E1006BBAD6 /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
 		4126E8071F44735C006BBAD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4132C3A51F54291E003910DD /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		4132C3A71F54293A003910DD /* OrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
+		4132C3A91F54480D003910DD /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		4132C3AB1F546468003910DD /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		41D4EC571F449BAC00146188 /* ItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
 		41DA4CF51F43369B0071F982 /* TrollyAppItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrollyAppItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DA4CF81F43369B0071F982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +78,17 @@
 			name = "Login SingUp";
 			sourceTree = "<group>";
 		};
+		4132C3A41F5428F7003910DD /* Order List View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4132C3A51F54291E003910DD /* OrderTableViewCell.swift */,
+				4132C3A71F54293A003910DD /* OrderListViewController.swift */,
+				4132C3A91F54480D003910DD /* OrderDetailViewController.swift */,
+				4132C3AB1F546468003910DD /* Storyboard.swift */,
+			);
+			name = "Order List View Controller";
+			sourceTree = "<group>";
+		};
 		41DA4CEC1F43369B0071F982 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +110,7 @@
 		41DA4CF71F43369B0071F982 /* TrollyAppItem */ = {
 			isa = PBXGroup;
 			children = (
+				4132C3A41F5428F7003910DD /* Order List View Controller */,
 				4126E8061F447332006BBAD6 /* Login SingUp */,
 				41DA4D0C1F434EBC0071F982 /* TableViewCell */,
 				41DA4CF81F43369B0071F982 /* AppDelegate.swift */,
@@ -221,6 +241,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -228,6 +249,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -262,11 +284,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				41D4EC581F449BAC00146188 /* ItemDetail.swift in Sources */,
+				4132C3AC1F546468003910DD /* Storyboard.swift in Sources */,
+				4132C3A81F54293B003910DD /* OrderListViewController.swift in Sources */,
 				4126E8081F44735C006BBAD6 /* LoginViewController.swift in Sources */,
+				4132C3A61F54291E003910DD /* OrderTableViewCell.swift in Sources */,
 				41DA4CFB1F43369B0071F982 /* ViewController.swift in Sources */,
 				41DA4D0E1F434EF30071F982 /* ItemTableViewCell.swift in Sources */,
 				41DA4D101F4353720071F982 /* ItemDetailViewController.swift in Sources */,
 				41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */,
+				4132C3AA1F54480D003910DD /* OrderDetailViewController.swift in Sources */,
 				4126E8051F4410E1006BBAD6 /* ItemInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

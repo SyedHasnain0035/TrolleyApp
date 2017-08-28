@@ -123,7 +123,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
     }
     // Search Bar Function
-   /* func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+ /*   func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }*/
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -156,7 +156,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 }
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-       // let searcBar = searcController.searchBar
+        //let searcBar = searcController.searchBar
         //let scope = searcBar.scopeButtonTitles![searcBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchText: searcController.searchBar.text!)
     }

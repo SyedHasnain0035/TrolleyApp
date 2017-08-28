@@ -82,7 +82,6 @@ class SearchProductViewController: UIViewController, UITableViewDelegate, UITabl
                     Trolley.shared.price = 0.0
                 }
             }
-    
             self.totalPriceLabel.text = "\(Trolley.shared.price)"
         })
         return cell

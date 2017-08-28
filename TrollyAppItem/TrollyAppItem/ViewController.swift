@@ -10,8 +10,9 @@ import UIKit
 import os.log
 import FirebaseAuth
 import Firebase
+import FirebaseDatabase
 class ViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
-    var items = [ItemInfo]()
+    static var items = [ItemInfo]()
     var handle: DatabaseHandle?
     var refrence: DatabaseReference?
     @IBOutlet weak var myTableView: UITableView!
@@ -21,8 +22,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         checkIfUserIsLogedIn()
         myTableView.delegate = self
         myTableView.dataSource = self
-        fetchItems()
-    
+        myTableView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         myTableView.reloadData()
@@ -35,25 +35,14 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
            let uId = Auth.auth().currentUser?.uid
             Database.database().reference().child("AddedUser").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
                 if  let dic = snapShot.value as? [String: Any] {
-                    self.navigationItem.title = dic["Name"] as? String
+                    self.title = dic["Name"] as? String
                 }
-                
             }, withCancel: nil)
             
         }
     }
-    func fetchItems()  {
-        Database.database().reference().child("ItemDetail").observe(.childAdded, with: { (snapShot) in
-            if  let dic = snapShot.value as? [String: Any] {
-                let itemDetail1 = ItemInfo(id: dic["ItemId"] as! String, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
-                self.items.append(itemDetail1)
-                self.myTableView.reloadData()
-                print("_______________")
-                print(dic)
-            }
-        }, withCancel: nil)
-    }
-    func handelLogout()  {
+    
+        func handelLogout()  {
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -66,9 +55,8 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         super.didReceiveMemoryWarning()
         
     }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return ViewController.items.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
@@ -79,14 +67,14 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         
         // Fetches the appropriate meal for the data source layout.
         cell.backGroundView.layer.cornerRadius = 12
-        cell.itemDetailLabel.text = "Detail:" + items[indexPath.row].itemDetail
-        cell.itemPrice.text = "Price: " + items[indexPath.row].itemPrice
+        cell.itemDetailLabel.text = "Detail:" + ViewController.items[indexPath.row].itemDetail
+        cell.itemPrice.text = "Price: " + ViewController.items[indexPath.row].itemPrice
         cell.itemImage.image = #imageLiteral(resourceName: "loading")
         let imageView = cell.viewWithTag(1) as! UIImageView
-        imageView.sd_setImage(with: URL(string: items[indexPath.row].itemImage))
-        cell.itemWeight.text = "Weight: " + items[indexPath.row].itemWeight
-        cell.itemType.text = "Type: " +  items[indexPath.row].itemType
-        if  items[indexPath.row].active == 1 {
+        imageView.sd_setImage(with: URL(string: ViewController.items[indexPath.row].itemImage))
+        cell.itemWeight.text = "Weight: " + ViewController.items[indexPath.row].itemWeight
+        cell.itemType.text = "Type: " +  ViewController.items[indexPath.row].itemType
+        if  ViewController.items[indexPath.row].active == 1 {
            cell.itemActiveImage.image = #imageLiteral(resourceName: "checked")
         } else {
             cell.itemActiveImage.image = #imageLiteral(resourceName: "blank_box")
@@ -106,7 +94,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            items.remove(at: indexPath.row)
+            ViewController.items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -124,6 +112,10 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
             guard segue.destination is LoginViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
+        case "orderList":
+            guard segue.destination is OrderListViewController else {
+                fatalError("Error: \(segue.destination)")
+            }
         case "AddItem":
             os_log("Adding a new Item.", log: OSLog.default, type: .debug)
             
@@ -140,7 +132,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedItem = items[indexPath.row]
+            let selectedItem = ViewController.items[indexPath.row]
             itemDetailViewController.item = selectedItem
                       
         default:
@@ -149,21 +141,20 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     }
     @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ItemDetailViewController, let item = sourceViewController.item {
-            
             if let selectedIndexPath = myTableView.indexPathForSelectedRow {
                 // Update an existing meal.
-                items[selectedIndexPath.row] = item
+                ViewController.items[selectedIndexPath.row] = item
                 myTableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new meal.
-                let newIndexPath = IndexPath(row: items.count, section: 0)
-                
-                items.append(item)
+                let newIndexPath = IndexPath(row: ViewController.items.count, section: 0)
+                ViewController.items.append(item)
                 myTableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-           
         }
+    }
+    @IBAction func didTapOrderList(_ sender: UIBarButtonItem) {
     }
     
 }

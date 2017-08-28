@@ -685,7 +685,7 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kE-Jq-DVb">
                                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="132.5"/>
                                                                             <subviews>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gUI-lA-697">
+                                                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gUI-lA-697">
                                                                                     <rect key="frame" x="1" y="1" width="118" height="130.5"/>
                                                                                 </imageView>
                                                                             </subviews>

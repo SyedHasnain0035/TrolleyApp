@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TolleyApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>90ACBCCADDB12F298AA608355B6564AA</key>
+		<key>414AC93D0008D34D0DC2B09586C5CDA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B284626CB7E88A70EBEBE075C2F8B965</key>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -53,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6391248C92BFB51717620DEB8089C4D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

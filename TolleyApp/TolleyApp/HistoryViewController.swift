@@ -74,17 +74,21 @@ class HistoryViewController: UIViewController,  UITableViewDelegate, UITableView
         }
        AlertView.showLoginAlert(self)
     }
-    
-    
     /// Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orders.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "HistroyTableViewCell", for: indexPath) as! HistroyTableViewCell
-        cell.dateLabel.text = orders[indexPath.row].detail
-        
-               return cell
+       
+        cell.detailLabel.text = "Detail: \(orders[indexPath.row].detail)"
+        cell.priceLabel.text = "Price: \(orders[indexPath.row].itemCount)"
+        cell.dateLabel.text = "Date: \(orders[indexPath.row].date)"
+        cell.recivedLabel.text = "User Name: \(orders[indexPath.row].userName)"
+        cell.itemImage.image = #imageLiteral(resourceName: "loading")
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.sd_setImage(with: URL(string: orders[indexPath.row].img))
+ return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

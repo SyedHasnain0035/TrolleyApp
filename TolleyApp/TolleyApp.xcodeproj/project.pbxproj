@@ -10,6 +10,7 @@
 		33A25FEA1F3E243F00AE104A /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33A25FE91F3E243F00AE104A /* AlertView.xib */; };
 		33A25FEC1F3E247C00AE104A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A25FEB1F3E247C00AE104A /* AlertView.swift */; };
 		4126C0ED1F3A111400D761B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4126C0EC1F3A111400D761B3 /* Main.storyboard */; };
+		4132C3AE1F546719003910DD /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3AD1F546719003910DD /* Storyboard.swift */; };
 		41443B991F3CAC8000F22111 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41443B981F3CAC8000F22111 /* GoogleService-Info.plist */; };
 		415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */; };
 		4167E52E1F4FF7A500A63988 /* AppTabbarControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167E52D1F4FF7A500A63988 /* AppTabbarControllerView.swift */; };
@@ -39,6 +40,7 @@
 		4114B3231F45B744009DAA47 /* TolleyApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TolleyApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		4126C0EC1F3A111400D761B3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		412C95189C550C436960499D /* Pods-TolleyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TolleyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp.release.xcconfig"; sourceTree = "<group>"; };
+		4132C3AD1F546719003910DD /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		41443B981F3CAC8000F22111 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4167E52D1F4FF7A500A63988 /* AppTabbarControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabbarControllerView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				416B77621F3314CA008D28B2 /* ItemInfo.swift */,
 				41822AC51F34749D0030C1FA /* Trolley.swift */,
+				4132C3AD1F546719003910DD /* Storyboard.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -182,8 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				41E21FA51F31F97000DFA04A /* AccountViewController.swift */,
-				41E21F981F31F7C600DFA04A /* Home */,
 				415989EC1F3AEA6300C3C3B4 /* RegisterViewController.swift */,
+				41E21F981F31F7C600DFA04A /* Home */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TolleyApp/Pods-TolleyApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -339,6 +343,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -375,6 +380,7 @@
 				41F407DF1F3B228400F319EA /* ProductViewController.swift in Sources */,
 				41E21FA21F31F95100DFA04A /* CheckOutViewController.swift in Sources */,
 				41E21F9D1F31F90700DFA04A /* SearchViewController.swift in Sources */,
+				4132C3AE1F546719003910DD /* Storyboard.swift in Sources */,
 				416B77691F332BB9008D28B2 /* SearchItemTableViewCell.swift in Sources */,
 				415989ED1F3AEA6300C3C3B4 /* RegisterViewController.swift in Sources */,
 				416B77631F3314CA008D28B2 /* ItemInfo.swift in Sources */,
