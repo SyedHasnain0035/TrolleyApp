@@ -13,6 +13,7 @@
 		4132C3A81F54293B003910DD /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3A71F54293A003910DD /* OrderListViewController.swift */; };
 		4132C3AA1F54480D003910DD /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3A91F54480D003910DD /* OrderDetailViewController.swift */; };
 		4132C3AC1F546468003910DD /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3AB1F546468003910DD /* Storyboard.swift */; };
+		4132C3B21F547604003910DD /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132C3B11F547604003910DD /* OrderDetailTableViewCell.swift */; };
 		41D4EC581F449BAC00146188 /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D4EC571F449BAC00146188 /* ItemDetail.swift */; };
 		41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CF81F43369B0071F982 /* AppDelegate.swift */; };
 		41DA4CFB1F43369B0071F982 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4CFA1F43369B0071F982 /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 		4132C3A71F54293A003910DD /* OrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
 		4132C3A91F54480D003910DD /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		4132C3AB1F546468003910DD /* Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		4132C3B11F547604003910DD /* OrderDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		41D4EC571F449BAC00146188 /* ItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
 		41DA4CF51F43369B0071F982 /* TrollyAppItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrollyAppItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DA4CF81F43369B0071F982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,10 +85,27 @@
 			children = (
 				4132C3A51F54291E003910DD /* OrderTableViewCell.swift */,
 				4132C3A71F54293A003910DD /* OrderListViewController.swift */,
-				4132C3A91F54480D003910DD /* OrderDetailViewController.swift */,
-				4132C3AB1F546468003910DD /* Storyboard.swift */,
 			);
 			name = "Order List View Controller";
+			sourceTree = "<group>";
+		};
+		4132C3AF1F54759C003910DD /* OrderDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				4132C3A91F54480D003910DD /* OrderDetailViewController.swift */,
+				4132C3B11F547604003910DD /* OrderDetailTableViewCell.swift */,
+			);
+			name = OrderDetailView;
+			sourceTree = "<group>";
+		};
+		4132C3B01F5475BD003910DD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4126E8041F4410E1006BBAD6 /* ItemInfo.swift */,
+				41D4EC571F449BAC00146188 /* ItemDetail.swift */,
+				4132C3AB1F546468003910DD /* Storyboard.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		41DA4CEC1F43369B0071F982 = {
@@ -110,12 +129,12 @@
 		41DA4CF71F43369B0071F982 /* TrollyAppItem */ = {
 			isa = PBXGroup;
 			children = (
+				4132C3B01F5475BD003910DD /* Classes */,
+				4132C3AF1F54759C003910DD /* OrderDetailView */,
 				4132C3A41F5428F7003910DD /* Order List View Controller */,
 				4126E8061F447332006BBAD6 /* Login SingUp */,
 				41DA4D0C1F434EBC0071F982 /* TableViewCell */,
 				41DA4CF81F43369B0071F982 /* AppDelegate.swift */,
-				4126E8041F4410E1006BBAD6 /* ItemInfo.swift */,
-				41D4EC571F449BAC00146188 /* ItemDetail.swift */,
 				41DA4CFA1F43369B0071F982 /* ViewController.swift */,
 				41DA4D0F1F4353720071F982 /* ItemDetailViewController.swift */,
 				41DA4CFC1F43369B0071F982 /* Main.storyboard */,
@@ -294,6 +313,7 @@
 				41DA4CF91F43369B0071F982 /* AppDelegate.swift in Sources */,
 				4132C3AA1F54480D003910DD /* OrderDetailViewController.swift in Sources */,
 				4126E8051F4410E1006BBAD6 /* ItemInfo.swift in Sources */,
+				4132C3B21F547604003910DD /* OrderDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
