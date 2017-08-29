@@ -32,7 +32,7 @@ class Storyboard: NSObject {
                     progressHUD = MBProgressHUD.showAdded(to: screenView, animated: true)
                     progressHUD?.mode = MBProgressHUDMode.indeterminate
                     progressHUD?.label.text = "Please wait "
-                    progressHUD?.detailsLabel.text = "Processing your payment"
+                    progressHUD?.detailsLabel.text = "Data Is Updating"
                     progressHUDRetainCount = 1
                 } else {
                     progressHUDRetainCount += 1
@@ -78,5 +78,5 @@ class Storyboard: NSObject {
             MBProgressHUD.hide(for: onView, animated: true)
         }
     }
- 
+    
 }

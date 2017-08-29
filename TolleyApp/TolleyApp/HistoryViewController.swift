@@ -20,7 +20,8 @@ class OrderItem {
     var detail = ""
     var date = ""
     var orderId = ""
-    init(img: String, userId: String, userName: String, itemId: String,itemCount: Int, detail: String, date: String, orderId: String ) {
+    var delevered = 0
+    init(img: String, userId: String, userName: String, itemId: String,itemCount: Int, detail: String, date: String, orderId: String, delevered: Int ) {
         self.img = img
         self.userId = userId
         self.userName = userName
@@ -29,6 +30,7 @@ class OrderItem {
         self.detail = detail
         self.date = date
         self.orderId = orderId
+        self.delevered = delevered
     }
 }
 
@@ -84,7 +86,12 @@ class HistoryViewController: UIViewController,  UITableViewDelegate, UITableView
         cell.detailLabel.text = "Detail: \(orders[indexPath.row].detail)"
         cell.priceLabel.text = "Price: \(orders[indexPath.row].itemCount)"
         cell.dateLabel.text = "Date: \(orders[indexPath.row].date)"
-        cell.recivedLabel.text = "User Name: \(orders[indexPath.row].userName)"
+        if orders[indexPath.row].delevered == 1 {
+            cell.recivedLabel.text = "Delevered:  Yes"
+        } else {
+           cell.recivedLabel.text = "Delevered:  No"
+        }
+        
         cell.itemImage.image = #imageLiteral(resourceName: "loading")
         let imageView = cell.viewWithTag(1) as! UIImageView
         imageView.sd_setImage(with: URL(string: orders[indexPath.row].img))
@@ -113,7 +120,7 @@ class HistoryViewController: UIViewController,  UITableViewDelegate, UITableView
         Database.database().reference().child("OrderedItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
                 print(snapShot)
-                let detailOrder = OrderItem(img: dic["imageUrl"] as! String, userId: dic["UserFKey"] as! String, userName: dic["userName"] as! String, itemId: dic["ItemFKey"] as! String, itemCount: dic["itemQuantity"] as! Int, detail: dic["Detail"] as! String,  date: dic["Date"] as! String, orderId: dic["OrderId"] as! String)
+                let detailOrder = OrderItem(img: dic["imageUrl"] as! String, userId: dic["UserFKey"] as! String, userName: dic["userName"] as! String, itemId: dic["ItemFKey"] as! String, itemCount: dic["itemQuantity"] as! Int, detail: dic["Detail"] as! String,  date: dic["Date"] as! String, orderId: dic["OrderId"] as! String, delevered: dic["Delever"] as! Int)
                 if  detailOrder.userId == id {
                     self.orders.append(detailOrder)
                     self.myTableView.reloadData()

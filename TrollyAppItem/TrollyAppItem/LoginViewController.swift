@@ -13,7 +13,7 @@ import FirebaseDatabase
 import MBProgressHUD
 
 class LoginViewController: UIViewController {
-
+    
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet var segmentButton: UISegmentedControl!
@@ -82,19 +82,21 @@ class LoginViewController: UIViewController {
     func findNumberOfItemInDataBase() {
         Database.database().reference().child("ItemDetail").observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { (datta, ggg) in
             let numberOfItem = datta.childrenCount
-            self.fetchItems(number: Int(numberOfItem))
+         //   self.fetchItems(number: Int(numberOfItem))
+            AppAllData.shared.fetchItemsWithCount(number: Int(numberOfItem), uiView: self)
         }, withCancel: nil)
     }
     var numberCount = 0
     func fetchItems(number: Int)  {
         Database.database().reference().child("ItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
-                 self.numberCount = self.numberCount + 1
+                self.numberCount = self.numberCount + 1
                 let itemDetail1 = ItemInfo(id: dic["ItemId"] as! String, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
-                ViewController.items.append(itemDetail1)
+                AppAllData.shared.allItemInfo.append(itemDetail1)
                 print("_______________")
                 print(dic)
                 if  self.numberCount == number {
+                    self.numberCount = 0
                     Storyboard.hideProgressHUD()
                     //Print into the console if successfully logged in
                     print("You have successfully logged in")
@@ -103,6 +105,6 @@ class LoginViewController: UIViewController {
             }
         }, withCancel: nil)
     }
-
-
+    
+    
 }

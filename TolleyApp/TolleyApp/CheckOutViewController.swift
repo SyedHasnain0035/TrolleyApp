@@ -144,6 +144,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         var noOfItem = 0
         var itemFKey = ""
         var imageUrl = ""
+        var delevered = 0
         let date = currentDateSet()
         for item in Trolley.shared.items {
             detail = item.itemDetail
@@ -152,7 +153,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
             imageUrl = item.itemImage
             // Item Save in data base
             let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
-            let itemStore = ["OrderId": keyId, "ItemFKey": itemFKey, "imageUrl": imageUrl, "Detail": detail,"userName": self.userName, "itemQuantity": noOfItem,"UserFKey": self.userFKey, "Date": date] as [String : Any]
+            let itemStore = ["OrderId": keyId, "ItemFKey": itemFKey, "imageUrl": imageUrl, "Detail": detail,"userName": self.userName, "itemQuantity": noOfItem,"UserFKey": self.userFKey, "Date": date, "Delever": delevered] as [String : Any]
             self.refrenceItemStore?.child(keyId).setValue(itemStore)
         }
     }

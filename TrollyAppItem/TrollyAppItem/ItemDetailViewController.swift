@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
+import MBProgressHUD
 class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate ,  UIPickerViewDataSource, UIPickerViewDelegate{
     
     @IBOutlet weak var itemTypePicker: UIPickerView!
@@ -22,13 +23,14 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet weak var itemWeightTextField: UITextField!
     @IBOutlet weak var itemPriceTextField: UITextField!
     @IBOutlet weak var itemImage: UIImageView!
-    
     @IBOutlet weak var itemDetailTextField: UITextField!
+    
     var selcted = false
     var selectedActive = 0
     var item: ItemInfo?
     var refrenceItemStore: DatabaseReference?
     var typesList = ["Fruit", "Vegetable"]
+    var edit = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegate()
@@ -133,6 +135,57 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
     }
+    func findNumberOfItemInDataBase() {
+        Database.database().reference().child("ItemDetail").observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { (datta, ggg) in
+            let numberOfItem = datta.childrenCount
+            AppAllData.shared.fetchAllItem(number: Int(numberOfItem), completion: { (suss) in
+                if suss {
+                    Storyboard.hideProgressHUD()
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }, withCancel: nil)
+    }
+    @IBAction func didTapSaveButton(_ sender: UIBarButtonItem) {
+        Storyboard.showProgressHUDWithTitle()
+        AppAllData.shared.allItemInfo = []
+        let detail = itemDetailTextField.text!
+        let price = itemPriceTextField.text!
+        let weight = itemWeightTextField.text!
+        let type = itemTypTextField.text!
+        let active = selectedActive
+        let imageName = NSUUID().uuidString
+        let storeRef = Storage.storage().reference().child("Item Images").child("\(imageName).png")
+        if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
+            storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("\(error)")
+                    return
+                }
+                if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
+                    // Item Save in data base
+                    if self.edit != true {
+                        let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
+                        let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
+                        self.refrenceItemStore?.child(keyId).setValue(itemStore)
+                        AppAllData.shared.fetchAllItem(completion: { (suss) in
+                            if suss {
+                                Storyboard.hideProgressHUD()
+                                _ = self.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                    } else {
+                        self.edit = false
+                        let itemStore = ["Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
+                        let ref = Database.database().reference().child("ItemDetail").child((self.item?.id)!)
+                        ref.updateChildValues(itemStore)
+                        self.findNumberOfItemInDataBase()
+                    }
+                }
+            })
+        }
+
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -157,14 +210,23 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
                 }
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     // Item Save in data base
+                    if self.edit != true {
                     let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
                     let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
                     self.refrenceItemStore?.child(keyId).setValue(itemStore)
+                      //  AppAllData.shared.fetchAllItem()
+                    } else {
+                        self.edit = false
+                        let itemStore = ["Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
+                        let ref = Database.database().reference().child("ItemDetail").child((self.item?.id)!)
+                        ref.updateChildValues(itemStore)
+                       // AppAllData.shared.fetchAllItem()
+                        
+                    }
                 }
             })
         }
     }
-    
     ////////////////////////////////////////////////////
     ///// Picker Type ///////////
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

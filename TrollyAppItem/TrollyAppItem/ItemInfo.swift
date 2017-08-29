@@ -24,9 +24,7 @@ class ItemInfo {
         self.itemType = itemType
         self.itemImage = itemImage
         self.active = active
-        
     }
-    
     var isActive: Bool {
         get {
             return active == 1

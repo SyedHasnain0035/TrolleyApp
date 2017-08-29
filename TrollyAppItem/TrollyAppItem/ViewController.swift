@@ -12,51 +12,35 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabase
 class ViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
-    static var items = [ItemInfo]()
+    var items = [ItemInfo]()
     var handle: DatabaseHandle?
     var refrence: DatabaseReference?
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        putValueInItem()
         checkIfUserIsLogedIn()
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.reloadData()
     }
+    func putValueInItem()  {
+        self.items = AppAllData.shared.allItemInfo
+        myTableView.reloadData()
+    }
     override func viewWillAppear(_ animated: Bool) {
         myTableView.reloadData()
         checkIfUserIsLogedIn()
+        putValueInItem()
     }
-    func checkIfUserIsLogedIn()  {
-        if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handelLogout), with: nil, afterDelay: 0)
-        } else {
-           let uId = Auth.auth().currentUser?.uid
-            Database.database().reference().child("AddedUser").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
-                if  let dic = snapShot.value as? [String: Any] {
-                    self.title = dic["Name"] as? String
-                }
-            }, withCancel: nil)
-            
-        }
-    }
-    
-        func handelLogout()  {
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-      //  let logIn = LoginViewController()
-        performSegue(withIdentifier: "sugueLogout", sender: self)
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ViewController.items.count
+        return items.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
@@ -64,18 +48,17 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell  else {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
-        
         // Fetches the appropriate meal for the data source layout.
         cell.backGroundView.layer.cornerRadius = 12
-        cell.itemDetailLabel.text = "Detail:" + ViewController.items[indexPath.row].itemDetail
-        cell.itemPrice.text = "Price: " + ViewController.items[indexPath.row].itemPrice
+        cell.itemDetailLabel.text = "Detail:" + items[indexPath.row].itemDetail
+        cell.itemPrice.text = "Price: " + items[indexPath.row].itemPrice
         cell.itemImage.image = #imageLiteral(resourceName: "loading")
         let imageView = cell.viewWithTag(1) as! UIImageView
-        imageView.sd_setImage(with: URL(string: ViewController.items[indexPath.row].itemImage))
-        cell.itemWeight.text = "Weight: " + ViewController.items[indexPath.row].itemWeight
-        cell.itemType.text = "Type: " +  ViewController.items[indexPath.row].itemType
-        if  ViewController.items[indexPath.row].active == 1 {
-           cell.itemActiveImage.image = #imageLiteral(resourceName: "checked")
+        imageView.sd_setImage(with: URL(string: items[indexPath.row].itemImage))
+        cell.itemWeight.text = "Weight: " + items[indexPath.row].itemWeight
+        cell.itemType.text = "Type: " +  items[indexPath.row].itemType
+        if  items[indexPath.row].active == 1 {
+            cell.itemActiveImage.image = #imageLiteral(resourceName: "checked")
         } else {
             cell.itemActiveImage.image = #imageLiteral(resourceName: "blank_box")
         }
@@ -89,26 +72,29 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
     }
-    
     // Override to support editing the table view.
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            ViewController.items.remove(at: indexPath.row)
+            items.remove(at: indexPath.row)
+          /*  let itemStore = ["ItemId": "", "Detail": "", "Image": "", "Price": "", "Weight": "", "Type": "", "Active": "" ] as [String : Any]
+            let ref = Database.database().reference().child("ItemDetail").child((items[indexPath.row].id)!)
+            ref.updateChildValues(itemStore)
+            */
             tableView.deleteRows(at: [indexPath], with: .fade)
+            myTableView.reloadData()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-   
-    
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
         switch(segue.identifier ?? "") {
         case "sugueLogout":
             try! Auth.auth().signOut()
+            items = []
+            AppAllData.shared.deleteAll()
             guard segue.destination is LoginViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
@@ -123,7 +109,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
             guard let itemDetailViewController = segue.destination as? ItemDetailViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
-            
+            itemDetailViewController.edit = true
             guard let selectedMealCell = sender as? ItemTableViewCell else {
                 fatalError("Unexpected sender: \(sender)")
             }
@@ -132,30 +118,50 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedItem = ViewController.items[indexPath.row]
+            let selectedItem = items[indexPath.row]
             itemDetailViewController.item = selectedItem
-                      
+            
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
         }
     }
-    @IBAction func unwindToItemList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ItemDetailViewController, let item = sourceViewController.item {
-            if let selectedIndexPath = myTableView.indexPathForSelectedRow {
-                // Update an existing meal.
-                ViewController.items[selectedIndexPath.row] = item
-                myTableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else {
-                // Add a new meal.
-                let newIndexPath = IndexPath(row: ViewController.items.count, section: 0)
-                ViewController.items.append(item)
-                myTableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-        }
-    }
     @IBAction func didTapOrderList(_ sender: UIBarButtonItem) {
     }
+    /////////////////////////////////////
+    ///// User Define Functions ////////
+    func checkIfUserIsLogedIn()  {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handelLogout), with: nil, afterDelay: 0)
+        } else {
+            let uId = Auth.auth().currentUser?.uid
+            fetchAllUserInfo()
+            Database.database().reference().child("AddedUser").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
+                if  let dic = snapShot.value as? [String: Any] {
+                    self.title = dic["Name"] as? String
+                }
+            }, withCancel: nil)
+            
+        }
+    }
     
+    func handelLogout()  {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        //  let logIn = LoginViewController()
+        performSegue(withIdentifier: "sugueLogout", sender: self)
+    }
+    func fetchAllUserInfo()  {
+        Database.database().reference().child("User").observe(.childAdded, with: { (snapShot) in
+            if  let dic = snapShot.value as? [String: Any] {
+                let userData = UserDetail(userId: "UserId" , userTitle: "Title", userFirstName: "FirstName", userLastName: "LastName", userCountryCode: "CountryCode", userMobileCode: "MobileCode", userMobileNumber: "MobileNumber", userEmail: "Email", userBirthDay: "Birthdate", userGender: "Gender", userNationality: "Nationality", userReligon: "Religion", userAreaAddress: "Area", userApparment: "Apparment", userBuildingAddress: "BuildingNo", userSpecialInstruction: "SpecialInstruction")
+                AppAllData.shared.userDetailInfo.append(userData)
+                print("_______________")
+                print(dic)
+            }
+        }, withCancel: nil)
+    }
 }
 

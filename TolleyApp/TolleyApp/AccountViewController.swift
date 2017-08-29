@@ -77,6 +77,7 @@ class AccountViewController: UIViewController {
                     Trolley.shared.allItemInfo.append(itemSave)
                 }
                 if  self.numberCount == number {
+                    self.numberCount = 0
                     self.goToNextVC()
                 }
             }
