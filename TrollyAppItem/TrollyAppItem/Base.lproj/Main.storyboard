@@ -202,7 +202,7 @@
                         </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="O3q-1Z-f72">
                             <connections>
-                                <segue destination="Xtc-Ze-0G8" kind="showDetail" identifier="AddItem" id="bJn-xu-9d9"/>
+                                <segue destination="Jes-Br-502" kind="show" identifier="AddItem" id="Qbg-oK-uY9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-396" y="203.74812593703149"/>
+            <point key="canvasLocation" x="-921" y="588"/>
         </scene>
         <!--Item Detail-->
         <scene sceneID="UlU-rd-U1Q">
@@ -431,7 +431,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1193" y="197"/>
+            <point key="canvasLocation" x="-316" y="587"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ybq-C9-5aU">
@@ -449,25 +449,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppb-EA-rX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1250" y="205"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="i4r-M8-cxo">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xtc-Ze-0G8" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dwa-gz-JzX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Jes-Br-502" kind="relationship" relationship="rootViewController" id="rbb-dm-TlO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4c8-a7-NFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="415" y="555"/>
+            <point key="canvasLocation" x="-929" y="-234"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J0x-t2-r6H">
@@ -561,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Bw-Ml-45V" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2046" y="200"/>
+            <point key="canvasLocation" x="-1851" y="594"/>
         </scene>
         <!--History-->
         <scene sceneID="eQk-x0-pWc">
@@ -738,7 +720,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sse-0H-fKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-364" y="1338"/>
+            <point key="canvasLocation" x="-868" y="1567"/>
         </scene>
         <!--Order Detail View Controller-->
         <scene sceneID="1cx-kB-i07">
@@ -953,7 +935,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2L-Rm-YdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736.79999999999995" y="1339.8800599700151"/>
+            <point key="canvasLocation" x="-229" y="1573"/>
         </scene>
     </scenes>
     <resources>
@@ -965,6 +947,6 @@
         <image name="photo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rbb-dm-TlO"/>
+        <segue reference="Qbg-oK-uY9"/>
     </inferredMetricsTieBreakers>
 </document>

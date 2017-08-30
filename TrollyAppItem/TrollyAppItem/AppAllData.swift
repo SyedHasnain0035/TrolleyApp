@@ -76,17 +76,27 @@ class AppAllData: NSObject {
         }, withCancel: nil)
     
     }
-    func fetchAllItem(completion: @escaping (Bool) -> ())  {
+    func fetchAllItem()  {
         Database.database().reference().child("ItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
                 let itemDetail1 = ItemInfo(id: dic["ItemId"] as! String, itemDetail: dic["Detail"] as! String, itemPrice: dic["Price"] as! String, itemWeight: dic["Weight"] as! String, itemType: dic["Type"] as! String, itemImage: dic["Image"] as! String, active: dic["Active"] as! Int)
                 self.allItemInfo.append(itemDetail1)
                 print("_______________")
                 print(dic)
-                    completion(true)
             }
         }, withCancel: nil)
         
     }
+    func fetchAllUserInfo()  {
+        Database.database().reference().child("User").observe(.childAdded, with: { (snapShot) in
+            if  let dic = snapShot.value as? [String: Any] {
+                let userData = UserDetail(userId: "UserId" , userTitle: "Title", userFirstName: "FirstName", userLastName: "LastName", userCountryCode: "CountryCode", userMobileCode: "MobileCode", userMobileNumber: "MobileNumber", userEmail: "Email", userBirthDay: "Birthdate", userGender: "Gender", userNationality: "Nationality", userReligon: "Religion", userAreaAddress: "Area", userApparment: "Apparment", userBuildingAddress: "BuildingNo", userSpecialInstruction: "SpecialInstruction")
+                self.userDetailInfo.append(userData)
+                print("_______________")
+                print(dic)
+            }
+        }, withCancel: nil)
+    }
+
 
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import os.log
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
@@ -53,9 +52,15 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             
         }
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     override func viewWillAppear(_ animated: Bool) {
         updateSaveButtonState()
     }
+    ///////////////////////////////////////
+    //////////Text Field Dalegates////////
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -73,6 +78,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         updateSaveButtonState()
         
     }
+    ////////////Image Picker/////////////
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -90,16 +96,10 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         if let selectedImage = selectedImageFromPicker {
             itemImage.image = selectedImage
         }
-        
         // Dissmis Picker
         dismiss(animated: true, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+   
     @IBAction func didTapActiveButton(_ sender: UIButton) {
         if self.selcted == false {
             selectedActive = 1
@@ -111,7 +111,6 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             self.checkActiveImage.image = #imageLiteral(resourceName: "blank_box")
         }
     }
-    
     @IBAction func didTapCancelButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
@@ -122,9 +121,8 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             owningNavigationController.popViewController(animated: true)
         }
         else {
-            fatalError("The MealViewController is not inside a navigation controller.")
+            fatalError("The ItemDetailViewController is not inside a navigation controller.")
         }
-        
     }
     @IBAction func selectImageFromPhotoGallery(_ sender: UITapGestureRecognizer) {
         let imagePickerController = UIImagePickerController()
@@ -135,19 +133,8 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
     }
-    func findNumberOfItemInDataBase() {
-        Database.database().reference().child("ItemDetail").observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { (datta, ggg) in
-            let numberOfItem = datta.childrenCount
-            AppAllData.shared.fetchAllItem(number: Int(numberOfItem), completion: { (suss) in
-                if suss {
-                    Storyboard.hideProgressHUD()
-                    _ = self.navigationController?.popViewController(animated: true)
-                }
-            })
-        }, withCancel: nil)
-    }
     @IBAction func didTapSaveButton(_ sender: UIBarButtonItem) {
-        Storyboard.showProgressHUDWithTitle()
+        Storyboard.showProgressHUD(onView: self.view)
         AppAllData.shared.allItemInfo = []
         let detail = itemDetailTextField.text!
         let price = itemPriceTextField.text!
@@ -165,16 +152,13 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     // Item Save in data base
                     if self.edit != true {
+                        AppAllData.shared.allItemInfo = []
                         let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
                         let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
                         self.refrenceItemStore?.child(keyId).setValue(itemStore)
-                        AppAllData.shared.fetchAllItem(completion: { (suss) in
-                            if suss {
-                                Storyboard.hideProgressHUD()
-                                _ = self.dismiss(animated: true, completion: nil)
-                            }
-                        })
+                        self.findNumberOfItemInDataBase()
                     } else {
+                        // Item Update
                         self.edit = false
                         let itemStore = ["Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
                         let ref = Database.database().reference().child("ItemDetail").child((self.item?.id)!)
@@ -184,49 +168,8 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
                 }
             })
         }
-
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        // Configure the destination view controller only when the save button is pressed.
-        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
-        }
-        let detail = itemDetailTextField.text!
-        let price = itemPriceTextField.text!
-        let weight = itemWeightTextField.text!
-        let type = itemTypTextField.text!
-        let active = selectedActive
-        let imageName = NSUUID().uuidString
-        let storeRef = Storage.storage().reference().child("Item Images").child("\(imageName).png")
-        
-        if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
-            storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-                if error != nil {
-                    print("\(error)")
-                    return
-                }
-                if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                    // Item Save in data base
-                    if self.edit != true {
-                    let keyId = (self.refrenceItemStore?.childByAutoId().key)! as String
-                    let itemStore = ["ItemId": keyId, "Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
-                    self.refrenceItemStore?.child(keyId).setValue(itemStore)
-                      //  AppAllData.shared.fetchAllItem()
-                    } else {
-                        self.edit = false
-                        let itemStore = ["Detail": detail, "Image": profileImageUrl, "Price": price, "Weight": weight, "Type": type, "Active": active ] as [String : Any]
-                        let ref = Database.database().reference().child("ItemDetail").child((self.item?.id)!)
-                        ref.updateChildValues(itemStore)
-                       // AppAllData.shared.fetchAllItem()
-                        
-                    }
-                }
-            })
-        }
-    }
+    
     ////////////////////////////////////////////////////
     ///// Picker Type ///////////
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -235,20 +178,14 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var countrows : Int = typesList.count
         if pickerView == itemTypePicker {
-            
             countrows = self.typesList.count
         }
-        
         return countrows
     }
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == itemTypePicker {
-            
             let titleRow = typesList[row]
-            
             return titleRow
-            
         }
         return ""
     }
@@ -259,7 +196,6 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             self.itemTypePicker.isHidden = true
         }
     }
-    
     //MARK: Private Methods
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
@@ -278,19 +214,29 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         itemWeightTextField.delegate = self
         itemDetailTextField.delegate = self
     }
+    func findNumberOfItemInDataBase() {
+        Database.database().reference().child("ItemDetail").observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { (datta, ggg) in
+            AppAllData.shared.allItemInfo = []
+            let numberOfItem = datta.childrenCount
+            AppAllData.shared.fetchAllItem(number: Int(numberOfItem), completion: { (suss) in
+                if suss {
+                    Storyboard.hideProgressHUD(onView: self.view)
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }, withCancel: nil)
+    }
     func uploadImageToFireBase() -> String {
         let storeRef = Storage.storage().reference().child("ItemImage.png")
         var url = ""
         if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
             storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
-                    
                     return
                 }
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                     url =  profileImageUrl
                 }
-                
             })
         }
         return url

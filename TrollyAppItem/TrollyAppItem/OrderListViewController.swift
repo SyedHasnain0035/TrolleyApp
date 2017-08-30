@@ -33,8 +33,6 @@ class OrderItem {
         self.delevered = delevered
     }
 }
-
-
 class OrderListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var myTableView: UITableView!
@@ -60,7 +58,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
             self.orders = []
             let uId = Auth.auth().currentUser?.uid
             Database.database().reference().child("AddedUser").child(uId!).observeSingleEvent(of: .value, with: { (snapShot) in
-                if  let dic = snapShot.value as? [String: Any] {
+                if  (snapShot.value as? [String: Any]) != nil {
                     self.fetchItems()
                 }
             }, withCancel: nil)
@@ -116,7 +114,6 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         }, withCancel: nil)
         
     }
-    
     func fetchItems()  {
         Database.database().reference().child("OrderedItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
@@ -134,7 +131,6 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         switch(segue.identifier ?? "") {
         case "sugueLogout":
             try! Auth.auth().signOut()
@@ -168,15 +164,4 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
