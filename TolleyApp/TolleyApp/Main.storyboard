@@ -28,22 +28,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEl-62-99M">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9le-UQ-f4D">
-                                                <rect key="frame" x="10" y="10" width="30" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="cCu-aH-OLc"/>
-                                                    <constraint firstAttribute="height" constant="30" id="qaJ-RN-SQ7"/>
-                                                </constraints>
-                                                <state key="normal" image="down_arrow"/>
-                                                <connections>
-                                                    <action selector="didTapBackButton:" destination="vpH-FB-gMv" eventType="touchUpInside" id="QNq-2n-obz"/>
-                                                    <action selector="didTapMenuButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="72R-uB-k0J"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRu-5f-uLq">
-                                                <rect key="frame" x="60" y="10" width="255" height="30"/>
+                                                <rect key="frame" x="20" y="15" width="335" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="RnE-Dc-SgM"/>
+                                                    <constraint firstAttribute="height" constant="30" id="N2g-LG-LOp"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,12 +40,10 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.1450980392" green="0.93725490199999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="9le-UQ-f4D" firstAttribute="leading" secondItem="PEl-62-99M" secondAttribute="leading" constant="10" id="5Ks-PV-HEF"/>
-                                            <constraint firstAttribute="trailing" secondItem="TRu-5f-uLq" secondAttribute="trailing" constant="60" id="9ms-fY-pQZ"/>
+                                            <constraint firstItem="TRu-5f-uLq" firstAttribute="centerY" secondItem="PEl-62-99M" secondAttribute="centerY" id="3ev-HI-AVw"/>
                                             <constraint firstAttribute="height" constant="60" id="TyO-OC-eqc"/>
-                                            <constraint firstItem="9le-UQ-f4D" firstAttribute="top" secondItem="PEl-62-99M" secondAttribute="top" constant="10" id="hxs-W6-KXF"/>
-                                            <constraint firstItem="TRu-5f-uLq" firstAttribute="top" secondItem="PEl-62-99M" secondAttribute="top" constant="10" id="rgL-tk-VKw"/>
-                                            <constraint firstItem="TRu-5f-uLq" firstAttribute="leading" secondItem="9le-UQ-f4D" secondAttribute="trailing" constant="20" id="sEs-Zo-xa1"/>
+                                            <constraint firstItem="TRu-5f-uLq" firstAttribute="leading" secondItem="PEl-62-99M" secondAttribute="leading" constant="20" id="cl3-iX-ZZO"/>
+                                            <constraint firstAttribute="trailing" secondItem="TRu-5f-uLq" secondAttribute="trailing" constant="20" id="e2X-pU-Jys"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCN-Ip-eYh">

@@ -21,7 +21,8 @@ class OrderItem {
     var date = ""
     var orderId = ""
     var delevered = 0
-    init(img: String, userId: String, userName: String, itemId: String,itemCount: Int, detail: String, date: String, orderId: String, delevered: Int ) {
+    var orderItemPrice = ""
+    init(img: String, userId: String, userName: String, itemId: String,itemCount: Int, detail: String, date: String, orderId: String, delevered: Int, orderItemPrice: String ) {
         self.img = img
         self.userId = userId
         self.userName = userName
@@ -31,6 +32,7 @@ class OrderItem {
         self.date = date
         self.orderId = orderId
         self.delevered = delevered
+        self.orderItemPrice = orderItemPrice
     }
 }
 class OrderListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -80,11 +82,8 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell", for: indexPath) as! OrderTableViewCell
         cell.backGroundView.layer.cornerRadius = 12
         cell.detailLabel.text = "Detail: \(orders[indexPath.row].detail)"
-        
-        let currentItem = AppAllData.shared.getItemDetail(id: orders[indexPath.row].itemId)
-        let currentItemPrice = Double(currentItem[0].itemPrice!)
-        let totalPrice = (currentItemPrice! * (Double(orders[indexPath.row].itemCount)))
-        cell.priceLabel.text = "Price: \(totalPrice) AED"
+      //  let totalPrice = Double(orders[indexPath.row].orderItemPrice)! * Double(orders[indexPath.row].itemCount)
+        cell.priceLabel.text = "User Name: \(orders[indexPath.row].userName) "
         cell.dateLabel.text = "Date: \(orders[indexPath.row].date)"
         if orders[indexPath.row].delevered == 1 {
             cell.recivedLabel.text = "Delevered: Yes"
@@ -118,7 +117,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         Database.database().reference().child("OrderedItemDetail").observe(.childAdded, with: { (snapShot) in
             if  let dic = snapShot.value as? [String: Any] {
                 print(snapShot)
-                let detailOrder = OrderItem(img: dic["imageUrl"] as! String, userId: dic["UserFKey"] as! String, userName: dic["userName"] as! String, itemId: dic["ItemFKey"] as! String, itemCount: dic["itemQuantity"] as! Int, detail: dic["Detail"] as! String,  date: dic["Date"] as! String, orderId: dic["OrderId"] as! String, delevered: dic["Delever"] as! Int)
+                let detailOrder = OrderItem(img: dic["imageUrl"] as! String, userId: dic["UserFKey"] as! String, userName: dic["userName"] as! String, itemId: dic["ItemFKey"] as! String, itemCount: dic["itemQuantity"] as! Int, detail: dic["Detail"] as! String,  date: dic["Date"] as! String, orderId: dic["OrderId"] as! String, delevered: dic["Delever"] as! Int, orderItemPrice: dic["Price"] as! String)
                 self.orders.append(detailOrder)
                 AppAllData.shared.ordetItemInfo.append(detailOrder)
                 self.myTableView.reloadData()

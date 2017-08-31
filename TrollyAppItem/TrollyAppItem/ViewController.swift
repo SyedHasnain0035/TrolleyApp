@@ -59,8 +59,13 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Delete the row from the data source and data base
+            let id = items[indexPath.row].id
+            refrence = Database.database().reference().child("ItemDetail").child(id!)
+            refrence?.removeValue()
             items.remove(at: indexPath.row)
+            AppAllData.shared.allItemInfo  = []
+            AppAllData.shared.allItemInfo = items
             tableView.deleteRows(at: [indexPath], with: .fade)
             myTableView.reloadData()
         }
