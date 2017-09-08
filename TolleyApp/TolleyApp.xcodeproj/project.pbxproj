@@ -154,12 +154,12 @@
 				41E21F9E1F31F92700DFA04A /* Account */,
 				41E21F9B1F31F8F400DFA04A /* Search */,
 				41E21F841F31E57300DFA04A /* AppDelegate.swift */,
+				4114B3231F45B744009DAA47 /* TolleyApp-Bridging-Header.h */,
 				41E21F8D1F31E57300DFA04A /* Assets.xcassets */,
 				4126C0EC1F3A111400D761B3 /* Main.storyboard */,
 				41E21F8F1F31E57300DFA04A /* LaunchScreen.storyboard */,
 				41443B981F3CAC8000F22111 /* GoogleService-Info.plist */,
 				41E21F921F31E57300DFA04A /* Info.plist */,
-				4114B3231F45B744009DAA47 /* TolleyApp-Bridging-Header.h */,
 			);
 			path = TolleyApp;
 			sourceTree = "<group>";

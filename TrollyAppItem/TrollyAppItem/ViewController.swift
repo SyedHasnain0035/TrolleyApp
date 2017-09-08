@@ -14,12 +14,15 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     var items = [ItemInfo]()
     var handle: DatabaseHandle?
     var refrence: DatabaseReference?
+    var isSideMenu = false
     @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var sideMenuConstrain: NSLayoutConstraint!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         putValueInItem()
         checkIfUserIsLogedIn()
+        customizeNavBar()
         myTableView.delegate = self
         myTableView.dataSource = self
     }
@@ -28,6 +31,9 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     }
     override func viewWillAppear(_ animated: Bool) {
         putValueInItem()
+    }
+    @IBAction func didTapSideMenue(_ sender: Any) {
+        self.sideMenu()
     }
     /////////////Table View Functions //////////////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,6 +81,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? "") {
         case "sugueLogout":
+            
             try! Auth.auth().signOut()
             items = []
             AppAllData.shared.deleteAll()
@@ -109,6 +116,11 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
         }
     }
+   
+    @IBAction func didTapLogoutButton(_ sender: UIButton) {
+    }
+    @IBAction func didTapOrderListButton(_ sender: UIButton) {
+    }
     @IBAction func didTapOrderList(_ sender: UIBarButtonItem) {
     }
     /////////////////////////////////////
@@ -139,5 +151,25 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         self.items = AppAllData.shared.allItemInfo
         myTableView.reloadData()
     }
+    func sideMenu()  {
+        if (isSideMenu) {
+            sideMenuConstrain.constant = -200
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            sideMenuConstrain.constant = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        isSideMenu = !isSideMenu
+    }
+    func customizeNavBar()  {
+        navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 15/255, green: 231/255, blue: 15/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+    }
+
 }
 
