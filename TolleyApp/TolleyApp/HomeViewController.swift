@@ -13,6 +13,8 @@ import FirebaseAuth
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     // OutLets
     @IBOutlet weak var popUpViewCountLabel: UILabel!
+    @IBOutlet weak var sideMenu: UIView!
+    @IBOutlet weak var mainViewCons: NSLayoutConstraint!
     @IBOutlet weak var popUpHideView2: UIView!
     @IBOutlet weak var popUpHideView: UIView!
     @IBOutlet weak var popUpViewImage: UIImageView!
@@ -34,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Declar Variable
     var selectedItems = [ItemInfo]()
+    var isSideMenu = false
     var popUpCount = 0
     // data base
     var ref: DatabaseReference?
@@ -156,6 +159,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             collectionViewSetting(item: selectedItems[popUpCount])
         }
     }
+    @IBAction func didTapViewButton(_ sender: UIButton) {
+        
+    }
     @IBAction func didTapPopUpViewRightArrow(_ sender: UIButton) {
         if popUpCount < selectedItems.count - 1 && popUpCount >= 0 {
             popUpCount = popUpCount + 1
@@ -204,14 +210,21 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.tabBarController?.selectedIndex = 4
     }
     @IBAction func sideMenuButtonClicked(_ sender: UIButton) {
-        self.Logout()
-        self.tabBarController?.selectedIndex = 0
+       self.sideMenu1()
+    
+        /* self.Logout()
+        self.tabBarController?.selectedIndex = 0*/
     }
     func  popUpItemDisplay(itemType: [ItemInfo])  {
         Trolley.shared.addItemToTrolley(item: itemType[popUpCount])
         popUpViewCountLabel.text = "\(itemType[popUpCount].itemCount!)"
         homeTotalPrice.text = "\(Trolley.shared.price)"
     }
+    @IBAction func didTapLogOutButton(_ sender: UIButton) {
+        self.Logout()
+        self.tabBarController?.selectedIndex = 0
+    }
+    
     ///////////////////////////////////////////////////
     //////////// user define function ////////////////
     func checkIfUserIsLogedIn()  {
@@ -290,4 +303,23 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         popUpHideView.alpha = 1
         popUpHideView2.alpha = 1
     }
+    func sideMenu1()  {
+        
+        if (isSideMenu) {
+            mainViewCons.constant = 0
+            myCollectionView.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+             myCollectionView.isUserInteractionEnabled = false
+            mainViewCons.constant = 200
+            sideMenu.isExclusiveTouch = true
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        isSideMenu = !isSideMenu
+    }
+
 }

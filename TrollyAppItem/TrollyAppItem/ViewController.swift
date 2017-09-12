@@ -17,6 +17,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     var isSideMenu = false
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var sideMenuConstrain: NSLayoutConstraint!
+    @IBOutlet weak var mainViewCon: NSLayoutConstraint!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,8 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         putValueInItem()
     }
     @IBAction func didTapSideMenue(_ sender: Any) {
-        self.sideMenu()
+       // self.sideMenu()
+        self.sideMenu1()
     }
     /////////////Table View Functions //////////////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,11 +156,28 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     func sideMenu()  {
         if (isSideMenu) {
             sideMenuConstrain.constant = -200
+            mainViewCon.constant = 200
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
             })
         } else {
             sideMenuConstrain.constant = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        isSideMenu = !isSideMenu
+    }
+    func sideMenu1()  {
+        if (isSideMenu) {
+            myTableView.isUserInteractionEnabled = true
+            mainViewCon.constant = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            myTableView.isUserInteractionEnabled = false
+            mainViewCon.constant = 200
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
             })
