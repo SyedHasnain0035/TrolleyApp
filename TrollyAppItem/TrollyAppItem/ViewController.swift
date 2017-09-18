@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 import FirebaseDatabase
+import Crashlytics
 class ViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     var items = [ItemInfo]()
     var handle: DatabaseHandle?
@@ -18,6 +19,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var sideMenuConstrain: NSLayoutConstraint!
     @IBOutlet weak var mainViewCon: NSLayoutConstraint!
+    
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,10 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     @IBAction func didTapSideMenue(_ sender: Any) {
        // self.sideMenu()
         self.sideMenu1()
+    }
+    @IBAction func didTapTestCrashButton(_ sender: UIButton) {
+        
+            Crashlytics.sharedInstance().crash()
     }
     /////////////Table View Functions //////////////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

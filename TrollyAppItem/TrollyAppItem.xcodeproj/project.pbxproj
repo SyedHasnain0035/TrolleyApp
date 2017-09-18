@@ -24,6 +24,8 @@
 		41DA4D0B1F4341BE0071F982 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41DA4D0A1F4341BE0071F982 /* GoogleService-Info.plist */; };
 		41DA4D0E1F434EF30071F982 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4D0D1F434EF30071F982 /* ItemTableViewCell.swift */; };
 		41DA4D101F4353720071F982 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4D0F1F4353720071F982 /* ItemDetailViewController.swift */; };
+		41EF9F6C1F67F01900B61AB8 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EF9F6A1F67F01900B61AB8 /* Fabric.framework */; };
+		41EF9F6D1F67F01900B61AB8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EF9F6B1F67F01900B61AB8 /* Crashlytics.framework */; };
 		8E086B1F268DE25AF6F8450C /* Pods_TrollyAppItem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC0F7F2C37D3F075AEF8AC /* Pods_TrollyAppItem.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		41DA4D0A1F4341BE0071F982 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41DA4D0D1F434EF30071F982 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		41DA4D0F1F4353720071F982 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		41EF9F6A1F67F01900B61AB8 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		41EF9F6B1F67F01900B61AB8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		66B8B904557057461DCAE3D1 /* Pods-TrollyAppItem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrollyAppItem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem.debug.xcconfig"; sourceTree = "<group>"; };
 		DEAC0F7F2C37D3F075AEF8AC /* Pods_TrollyAppItem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrollyAppItem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -59,6 +63,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E086B1F268DE25AF6F8450C /* Pods_TrollyAppItem.framework in Frameworks */,
+				41EF9F6D1F67F01900B61AB8 /* Crashlytics.framework in Frameworks */,
+				41EF9F6C1F67F01900B61AB8 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,7 @@
 		41DA4CF71F43369B0071F982 /* TrollyAppItem */ = {
 			isa = PBXGroup;
 			children = (
+				41EF9F691F67EFFD00B61AB8 /* Sypporting Files */,
 				4132C3B01F5475BD003910DD /* Classes */,
 				4132C3AF1F54759C003910DD /* OrderDetailView */,
 				4132C3A41F5428F7003910DD /* Order List View Controller */,
@@ -158,6 +165,15 @@
 			name = TableViewCell;
 			sourceTree = "<group>";
 		};
+		41EF9F691F67EFFD00B61AB8 /* Sypporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				41EF9F6A1F67F01900B61AB8 /* Fabric.framework */,
+				41EF9F6B1F67F01900B61AB8 /* Crashlytics.framework */,
+			);
+			name = "Sypporting Files";
+			sourceTree = "<group>";
+		};
 		C28B9A48D098BBD646B2B4AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +195,7 @@
 				41DA4CF31F43369B0071F982 /* Resources */,
 				4FCDEF9EB5F3A141F64A54A3 /* [CP] Embed Pods Frameworks */,
 				25C4EE13E19062EB25F3F796 /* [CP] Copy Pods Resources */,
+				41EF9F681F67EF5B00B61AB8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -253,6 +270,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrollyAppItem/Pods-TrollyAppItem-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		41EF9F681F67EF5B00B61AB8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 34e809834217eebfbe975bab08e25a60dcd1c425 07a8d81df64291ea8d6a608450e44d8e305a77d91c4972cb521a2e6a67a5e3f8";
 		};
 		4FCDEF9EB5F3A141F64A54A3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -442,6 +472,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrollyAppItem",
+				);
 				INFOPLIST_FILE = TrollyAppItem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devclan.TrollyAppItem;
@@ -458,6 +493,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrollyAppItem",
+				);
 				INFOPLIST_FILE = TrollyAppItem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devclan.TrollyAppItem;
