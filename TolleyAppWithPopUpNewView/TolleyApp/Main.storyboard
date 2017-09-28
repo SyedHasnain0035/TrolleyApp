@@ -986,35 +986,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qR1-8a-AbQ">
                                         <rect key="frame" x="0.0" y="100" width="375" height="40"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg2-qG-dPW">
-                                                <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WD0-hh-7UV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="All Items">
-                                                            <color key="titleColor" red="0.1450980392" green="0.93725490199999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="allItemSelected:" destination="9pv-A4-QxB" eventType="touchUpInside" id="pot-W9-xop"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.1450980392" green="0.93725490199999995" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="WD0-hh-7UV" secondAttribute="trailing" id="40h-3R-s6h"/>
-                                                    <constraint firstItem="WD0-hh-7UV" firstAttribute="top" secondItem="bg2-qG-dPW" secondAttribute="top" id="Abl-Ne-wqp"/>
-                                                    <constraint firstAttribute="bottom" secondItem="WD0-hh-7UV" secondAttribute="bottom" constant="2" id="eRT-Mh-mWi"/>
-                                                    <constraint firstItem="WD0-hh-7UV" firstAttribute="leading" secondItem="bg2-qG-dPW" secondAttribute="leading" id="z7N-Rs-0qW"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-GI-ba3">
-                                                <rect key="frame" x="125" y="0.0" width="125" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-dP-MRd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Fruit">
+                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                                        <state key="normal" title="Fruits">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
@@ -1024,50 +1003,20 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="9gP-dP-MRd" firstAttribute="leading" secondItem="vcF-GI-ba3" secondAttribute="leading" id="B2f-ch-qSg"/>
-                                                    <constraint firstAttribute="trailing" secondItem="9gP-dP-MRd" secondAttribute="trailing" id="F5Y-Sl-pmS"/>
-                                                    <constraint firstAttribute="bottom" secondItem="9gP-dP-MRd" secondAttribute="bottom" constant="2" id="QH9-Pb-Ajq"/>
-                                                    <constraint firstItem="9gP-dP-MRd" firstAttribute="top" secondItem="vcF-GI-ba3" secondAttribute="top" id="jco-MJ-x0F"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7N-Wn-Sgb">
-                                                <rect key="frame" x="250" y="0.0" width="125" height="40"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LV-Hv-UBw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Vegetable">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="vegetableSelected:" destination="9pv-A4-QxB" eventType="touchUpInside" id="xjJ-xT-cUm"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="9LV-Hv-UBw" secondAttribute="trailing" id="1iq-5K-0rf"/>
-                                                    <constraint firstAttribute="bottom" secondItem="9LV-Hv-UBw" secondAttribute="bottom" constant="2" id="9Ma-ze-n6b"/>
-                                                    <constraint firstItem="9LV-Hv-UBw" firstAttribute="leading" secondItem="t7N-Wn-Sgb" secondAttribute="leading" id="OfM-xj-nGE"/>
-                                                    <constraint firstItem="9LV-Hv-UBw" firstAttribute="top" secondItem="t7N-Wn-Sgb" secondAttribute="top" id="PFo-es-dLZ"/>
+                                                    <constraint firstItem="9gP-dP-MRd" firstAttribute="top" secondItem="vcF-GI-ba3" secondAttribute="top" id="biG-xN-7wg"/>
+                                                    <constraint firstItem="9gP-dP-MRd" firstAttribute="leading" secondItem="vcF-GI-ba3" secondAttribute="leading" id="c2T-fb-uSs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9gP-dP-MRd" secondAttribute="trailing" id="iRn-Jf-mtF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9gP-dP-MRd" secondAttribute="bottom" constant="5" id="jrP-0l-EPr"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="bg2-qG-dPW" firstAttribute="leading" secondItem="qR1-8a-AbQ" secondAttribute="leading" id="0Hp-ie-dPJ"/>
-                                            <constraint firstItem="vcF-GI-ba3" firstAttribute="top" secondItem="qR1-8a-AbQ" secondAttribute="top" id="0oq-qw-daQ"/>
-                                            <constraint firstItem="vcF-GI-ba3" firstAttribute="width" secondItem="bg2-qG-dPW" secondAttribute="width" id="1Lb-iF-vtz"/>
-                                            <constraint firstItem="bg2-qG-dPW" firstAttribute="top" secondItem="qR1-8a-AbQ" secondAttribute="top" id="2HE-xx-cII"/>
-                                            <constraint firstItem="t7N-Wn-Sgb" firstAttribute="top" secondItem="qR1-8a-AbQ" secondAttribute="top" id="5Rm-hj-YLx"/>
-                                            <constraint firstItem="t7N-Wn-Sgb" firstAttribute="width" secondItem="bg2-qG-dPW" secondAttribute="width" id="FdS-C2-qyK"/>
-                                            <constraint firstItem="t7N-Wn-Sgb" firstAttribute="leading" secondItem="vcF-GI-ba3" secondAttribute="trailing" id="JAC-ny-am8"/>
-                                            <constraint firstAttribute="trailing" secondItem="t7N-Wn-Sgb" secondAttribute="trailing" id="Me9-67-e73"/>
                                             <constraint firstAttribute="height" constant="40" id="NW8-E2-bDu"/>
-                                            <constraint firstAttribute="bottom" secondItem="t7N-Wn-Sgb" secondAttribute="bottom" id="ZS8-qK-hI5"/>
-                                            <constraint firstAttribute="bottom" secondItem="bg2-qG-dPW" secondAttribute="bottom" id="Zej-Zd-rfT"/>
-                                            <constraint firstAttribute="bottom" secondItem="vcF-GI-ba3" secondAttribute="bottom" id="bNN-6G-JIZ"/>
-                                            <constraint firstItem="vcF-GI-ba3" firstAttribute="leading" secondItem="bg2-qG-dPW" secondAttribute="trailing" id="mjw-7U-we0"/>
+                                            <constraint firstItem="vcF-GI-ba3" firstAttribute="top" secondItem="qR1-8a-AbQ" secondAttribute="top" id="VZL-73-226"/>
+                                            <constraint firstAttribute="bottom" secondItem="vcF-GI-ba3" secondAttribute="bottom" id="mgG-0E-6Hq"/>
+                                            <constraint firstItem="vcF-GI-ba3" firstAttribute="leading" secondItem="qR1-8a-AbQ" secondAttribute="leading" id="pM9-2M-yqw"/>
+                                            <constraint firstAttribute="trailing" secondItem="vcF-GI-ba3" secondAttribute="trailing" id="scS-yR-9OA"/>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6ex-db-1fv">
@@ -1119,8 +1068,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="QTC-Ag-7w6"/>
                     <connections>
-                        <outlet property="allItemButton" destination="WD0-hh-7UV" id="xta-Mv-Elr"/>
-                        <outlet property="allItemView" destination="bg2-qG-dPW" id="jlB-Vh-KUV"/>
                         <outlet property="fruitButton" destination="9gP-dP-MRd" id="vyl-WT-JR6"/>
                         <outlet property="fruitView" destination="vcF-GI-ba3" id="1hH-WL-E76"/>
                         <outlet property="homeTotalPrice" destination="ddV-hc-0gi" id="r5y-NE-T0g"/>
@@ -1129,8 +1076,6 @@
                         <outlet property="mySearchBar" destination="RwE-9d-OhM" id="cIq-Z9-ayx"/>
                         <outlet property="sideMenu" destination="W2A-dc-GgD" id="HdD-6E-nYF"/>
                         <outlet property="trollyButton" destination="62R-f0-5Ua" id="Dc4-LX-qDB"/>
-                        <outlet property="vegetableButton" destination="9LV-Hv-UBw" id="jo5-RR-HhH"/>
-                        <outlet property="vegetableView" destination="t7N-Wn-Sgb" id="mJr-qV-yJz"/>
                         <segue destination="BUa-RP-jAB" kind="presentation" identifier="SearchProductViewController" id="pt4-SP-U3z"/>
                     </connections>
                 </viewController>
@@ -1627,7 +1572,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                                 <color key="backgroundColor" red="0.14555376840000001" green="0.64903875619999996" blue="0.051399101279999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                                <state key="normal" title="All Type">
+                                                <state key="normal" title="All Items">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -1650,7 +1595,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                                 <color key="backgroundColor" red="0.14555376840000001" green="0.64903875619999996" blue="0.051399101279999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                                <state key="normal" title="Vegetabel">
+                                                <state key="normal" title="Vegetables">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -1673,7 +1618,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                                 <color key="backgroundColor" red="0.14555376840000001" green="0.64903875619999996" blue="0.051399101279999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                                <state key="normal" title="Fruit">
+                                                <state key="normal" title="Fruits">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>

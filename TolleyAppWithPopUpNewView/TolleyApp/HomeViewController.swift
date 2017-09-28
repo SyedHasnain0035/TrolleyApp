@@ -212,29 +212,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     func buttonEffectOnUI(_ type: String) {
+       fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
+        fruitView.backgroundColor = UIColor.green
         if type == "veg" {
-            allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            vegetableButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-            allItemView.backgroundColor = UIColor.white
-            fruitView.backgroundColor = UIColor.white
-            vegetableView.backgroundColor = UIColor.green
+            fruitButton.setTitle("Vegetables", for: .normal)
             myCollectionView.reloadData()
         } else if type == "fruit" {
-            allItemButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-            vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            allItemView.backgroundColor = UIColor.white
-            fruitView.backgroundColor = UIColor.green
-            vegetableView.backgroundColor = UIColor.white
+            fruitButton.setTitle("Fruits", for: .normal)
             myCollectionView.reloadData()
         } else {
-            allItemButton.setTitleColor(UIColor.green, for: UIControlState.normal)
-            fruitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            vegetableButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-            allItemView.backgroundColor = UIColor.green
-            fruitView.backgroundColor = UIColor.white
-            vegetableView.backgroundColor = UIColor.white
+            fruitButton.setTitle("All Items", for: .normal)
             myCollectionView.reloadData()
         }
     }
