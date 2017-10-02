@@ -18,12 +18,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var trollyButton: UIButton!
     @IBOutlet weak var homeTotalPrice: UILabel!
     @IBOutlet weak var mySearchBar: UISearchBar!
-    @IBOutlet weak var vegetableView: UIView!
     @IBOutlet weak var fruitView: UIView!
-    @IBOutlet weak var allItemView: UIView!
-    @IBOutlet weak var vegetableButton: UIButton!
     @IBOutlet weak var fruitButton: UIButton!
-    @IBOutlet weak var allItemButton: UIButton!
     @IBOutlet weak var myCollectionView: UICollectionView!
 
     // Declar Variable
@@ -148,18 +144,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
    
     @IBAction func didTapViewButton(_ sender: UIButton) {
     }
-    @IBAction func allItemSelected(_ sender: UIButton) {
-     //   buttonEffectOnUI("all")
-     //   selectedItems = Trolley.shared.allItemInfo
-    }
-    @IBAction func fruitSelected(_ sender: UIButton) {
-     //   buttonEffectOnUI("fruit")
-    //    selectedItems = Trolley.shared.getFruits()
-    }
-    @IBAction func vegetableSelected(_ sender: UIButton) {
-     //   buttonEffectOnUI("veg")
-     //   selectedItems = Trolley.shared.getVegitables()
-    }
     @IBAction func didTapTrolleyButton(_ sender: UIButton) {
         let apptabbarvc = self.tabBarController as? AppTabbarControllerView
         apptabbarvc?.previousIndex = apptabbarvc?.selectedIndex
@@ -167,7 +151,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     @IBAction func sideMenuButtonClicked(_ sender: UIButton) {
        self.sideMenu1()
-    
         /* self.Logout()
         self.tabBarController?.selectedIndex = 0*/
     }
@@ -175,7 +158,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.Logout()
         self.tabBarController?.selectedIndex = 0
     }
-    
     ///////////////////////////////////////////////////
     //////////// user define function ////////////////
     func checkIfUserIsLogedIn()  {
@@ -209,7 +191,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         } catch let logoutError {
             print(logoutError)
         }
-        
     }
     func buttonEffectOnUI(_ type: String) {
        fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
@@ -226,7 +207,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func sideMenu1()  {
-        
         if (isSideMenu) {
             mainViewCons.constant = 0
             myCollectionView.isUserInteractionEnabled = true
@@ -243,5 +223,4 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         isSideMenu = !isSideMenu
     }
-
 }
