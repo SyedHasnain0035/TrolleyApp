@@ -77,10 +77,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         popOverVC.count = index
         popOverVC.selectedItems = self.selectedItems
         popOverVC.hView = self
-        self.addChildViewController(popOverVC)
+        self.addChild(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
+        popOverVC.didMove(toParent: self)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedItems.count
@@ -175,7 +175,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.selectedItems = Trolley.shared.allItemInfo
         myCollectionView.reloadData()
     }
-    func handelLogout()  {
+    @objc func handelLogout()  {
         do {
             try Auth.auth().signOut()
             Trolley.shared.deleteAll()
@@ -193,7 +193,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func buttonEffectOnUI(_ type: String) {
-       fruitButton.setTitleColor(UIColor.green, for: UIControlState.normal)
+        fruitButton.setTitleColor(UIColor.green, for: UIControl.State.normal)
         fruitView.backgroundColor = UIColor.green
         if type == "veg" {
             fruitButton.setTitle("Vegetables", for: .normal)

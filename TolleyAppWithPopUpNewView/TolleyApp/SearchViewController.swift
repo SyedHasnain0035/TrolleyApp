@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             }, withCancel: nil)
         }
     }
-    func handelLogout()  {
+ @objc func handelLogout()  {
         do {
             try Auth.auth().signOut()
             Trolley.shared.deleteAll()

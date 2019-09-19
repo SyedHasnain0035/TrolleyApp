@@ -66,7 +66,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
             }, withCancel: nil)
         }
     }
-    func handelLogout()  {
+    @objc func handelLogout()  {
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -96,7 +96,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         imageView.sd_setImage(with: URL(string: orders[indexPath.row].img))
         return cell
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             myTableView.deleteRows(at: [indexPath], with: .fade)

@@ -28,10 +28,10 @@ class LoginViewController: UIViewController {
     }
     @IBAction func didTapSegmentedControl(_ sender: UISegmentedControl) {
         if segmentButton.selectedSegmentIndex == 0 {
-            let image1 = UIImage(named: "login") as UIImage!
+            let image1 = UIImage(named: "login") as UIImage?
             self.saveButton.setImage(image1, for: .normal)
         } else {
-            let image1 = UIImage(named: "singUp") as UIImage!
+            let image1 = UIImage(named: "singUp") as UIImage?
             self.saveButton.setImage(image1, for: .normal)
         }
     }

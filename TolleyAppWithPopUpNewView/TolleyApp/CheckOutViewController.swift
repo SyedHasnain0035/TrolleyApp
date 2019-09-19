@@ -55,7 +55,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
             }, withCancel: nil)
         }
     }
-    func handelLogout()  {
+    @objc func handelLogout()  {
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -121,7 +121,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         })
         return cell
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             Trolley.shared.items.remove(at: indexPath.row)

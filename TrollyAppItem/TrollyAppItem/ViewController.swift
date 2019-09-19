@@ -71,7 +71,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         return 170
     }
     // Override to support editing the table view.
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source and data base
             let id = items[indexPath.row].id
@@ -146,7 +146,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
             }, withCancel: nil)
         }
     }
-    func handelLogout()  {
+    @objc func handelLogout()  {
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
@@ -191,9 +191,9 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         isSideMenu = !isSideMenu
     }
     func customizeNavBar()  {
-        navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 15/255, green: 231/255, blue: 15/255, alpha: 1)
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.tintColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 15/255, green: 231/255, blue: 15/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
 
 }

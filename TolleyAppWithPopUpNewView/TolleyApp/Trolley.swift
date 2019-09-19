@@ -76,7 +76,7 @@ class Trolley: NSObject {
 extension String {
     func toDouble() -> Double? {
         let numberFormatter = NumberFormatter()
-        numberFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        numberFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
         return numberFormatter.number(from: self)?.doubleValue
     }
 }

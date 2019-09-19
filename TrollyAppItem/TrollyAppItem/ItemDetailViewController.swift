@@ -74,20 +74,20 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         }
         return true
     }
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
-        
     }
     ////////////Image Picker/////////////
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var selectedImageFromPicker: UIImage?
         
-        if let editedImage = info [UIImagePickerControllerEditedImage] as? UIImage {
+        if let editedImage = info [UIImagePickerController.InfoKey.editedImage] as? UIImage {
             selectedImageFromPicker = editedImage
-        } else if let orignalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        } else if let orignalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImageFromPicker = orignalImage
         }else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -97,7 +97,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
             itemImage.image = selectedImage
         }
         // Dissmis Picker
-        dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
    
     @IBAction func didTapActiveButton(_ sender: UIButton) {
@@ -143,7 +143,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
         let active = selectedActive
         let imageName = NSUUID().uuidString
         let storeRef = Storage.storage().reference().child("Item Images").child("\(imageName).png")
-        if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
+        if let uploadData = self.itemImage.image!.pngData() {
             storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
                     print("\(error)")
@@ -229,7 +229,7 @@ class ItemDetailViewController: UIViewController, UITextFieldDelegate, UIImagePi
     func uploadImageToFireBase() -> String {
         let storeRef = Storage.storage().reference().child("ItemImage.png")
         var url = ""
-        if let uploadData = UIImagePNGRepresentation(self.itemImage.image!) {
+        if let uploadData = self.itemImage.image!.pngData() {
             storeRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
                     return
