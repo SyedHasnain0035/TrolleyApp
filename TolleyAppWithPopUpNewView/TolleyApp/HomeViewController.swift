@@ -193,7 +193,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func buttonEffectOnUI(_ type: String) {
-        fruitButton.setTitleColor(UIColor.green, for: UIControl.State.normal)
+         fruitButton.setTitleColor(UIColor.green, for: UIControl.State.normal)
         fruitView.backgroundColor = UIColor.green
         if type == "veg" {
             fruitButton.setTitle("Vegetables", for: .normal)
